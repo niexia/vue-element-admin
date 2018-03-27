@@ -1,13 +1,19 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
+    <button @click="returnHome">返回</button>
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+      returnHome(){
+         this.$router.push({ path: '/' });
+      }
+  }
 }
 </script>
 
