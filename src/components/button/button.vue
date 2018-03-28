@@ -5,47 +5,55 @@
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',
-      size ? 'el-button--' + type : '',
+      size ? 'el-button--' + size : '',
+      {
+        'is-disabled': disabled,
+        'is-loading': loading,
+        'is-plain': plain
+      }
     ]"
   >
-  <i class="el-icon-loading" v-if="loading" @click="handleInnerClick"></i>
-  <i :class="'el-icon-' + icon" v-if="icon && !loading" @click="handleInnerClidk"></i>
-  <span v-if="$slots.default" @click="handleInnerClick"><slot></slot></span>
+    <i class="el-icon-loading" v-if="loading" @click="handleInnerClick"></i>
+    <i :class="'el-icon-' + icon" v-if="icon && !loading" @click="handleInnerClick"></i>
+    <span v-if="$slots.default" @click="handleInnerClick"><slot></slot></span>
   </button>
 </template>
 <script>
-  export default{
-    name: 'El-button',
+  export default {
+    name: 'ElButton',
 
-    props:{
-      type:{ //类型 primary,success,warning,danger,info,text
+    props: {
+      type: { //
         type: String,
         default: 'default'
       },
-      size: String, //尺寸 large,small,mini
-      icon: {
-        type:String,
-        default:'',
+      size: String,
+      icon: { //
+        type: String,
+        default: ''
       },
-      nativeType:{ //原生 type 属性 button,submit,rese
+      nativeType: {
         type: String,
         default: 'button'
       },
-      loading: Boolean, //是否加载中状态
-      disabled: Boolean, //是否禁用状态
-      plain: Boolean,  //是否朴素按钮
-      autofocus: Boolean, //	是否默认聚焦
+      loading: Boolean, //
+      disabled: Boolean, //
+      plain: Boolean, //
+      autofocus: Boolean
     },
 
-    methods:{
-      handleClick(evet){
+    methods: {
+      handleClick(evt) {
         this.$emit('click', evt);
       },
-      handleInnerClick(evet){
-        if(this.disabled){
-          evet.stopPropagation();
+      handleInnerClick(evt) {
+        if (this.disabled) {
+          evt.stopPropagation();
         }
       }
     }
-  }
+  };
 </script>
+<style>
+  @import '../../assets/css/button.css';
+</style>

@@ -43,3 +43,9 @@ Vue.directive('vccc-loading', {
     }
   }
 })
+/** 
+ * Vue.api:
+ * Vue.extent()
+ * el
+ * mouted()
+*/
