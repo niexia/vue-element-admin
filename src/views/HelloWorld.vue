@@ -6,6 +6,9 @@
       <li>
         <button @click="loading">loading</button>
       </li>
+      <li>
+        <button @click="step">steps</button>
+      </li>
     </ul>
   </div>
 </template>
@@ -23,7 +26,11 @@ export default {
   methods: {
     loading(){
       this.$router.push({ path: '/loading' });
+    },
+    step(){
+      this.$router.push({ path:'/step'});
     }
+    
   }
 
   

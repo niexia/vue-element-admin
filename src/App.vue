@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <button @click="returnHome">返回</button>
+    <div class="return">
+      <span @click="returnHome">返回首页</span>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -25,5 +26,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.return {
+  margin: 5px;
+  background-color: #23ff23;
 }
 </style>
