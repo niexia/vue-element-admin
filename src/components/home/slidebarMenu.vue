@@ -15,7 +15,12 @@ var render = function(h){
             index: data.path,
           },
         },
-        [<span slot="title"><i class={iconMap.getIcon(data.path)}></i><span>{data.name}</span></span>].concat(subs(data.children))
+        [
+          <template slot="title">
+            <i class={iconMap.getIcon(data.path)}></i>
+            <span slot="title">{data.name}</span>
+          </template>
+        ].concat(subs(data.children))
       )
     }
     else{

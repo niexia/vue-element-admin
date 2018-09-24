@@ -22,18 +22,22 @@ html,body{
   width: 200px;
 }
 .views__wrapper > .views__slideBar > .views__menu > .slideBar__expand{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 50px;
   box-sizing: border-box;
-  padding: 18px;
   cursor: pointer;
 }
 .views__wrapper > .views__slideBar > .views__menu > .slideBar__expand .iconfont{
   color: #ffffff;
+  font-size: 20px;
 }
 .views__wrapper > .views__slideBar > .views__menu > .el-submenu .iconfont{
   position: relative;
   top: 3px;
-  left: -3px;
+  margin: 0 2px;
+  font-size: 20px;
 }
 .views__wrapper > .views__content{
   flex: 1;
@@ -44,4 +48,6 @@ html,body{
 }
 .views__wrapper > .views__content > .content__main{
   height: calc(100% - 50px);
+  padding: 10px 20px;
+  overflow: auto;
 }

@@ -2,16 +2,17 @@
   <div class="views__wrapper">
     <slidebar></slidebar>
     <div class="views__content">
-      <div class="content__header"></div>
+      <content-header></content-header>
       <router-view></router-view>
     </div>
   </div>
 </template>
 <script>
 import slidebar from "./slidebar.vue";
+import header from "./header.vue";
 export default{
   name: "home",
-  components:{slidebar},
+  components:{slidebar: slidebar, contentHeader: header},
   data(){
     return{
 

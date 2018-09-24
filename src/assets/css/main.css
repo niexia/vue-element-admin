@@ -6,5 +6,6 @@
 @import './components/steps.css';
 @import './layout/home.css';
 @import './vendors/font-awesome.css';
-@import '../font/iconfont.css'
-
+@import './../font/iconfont.css';
+@import './../../../static/css/github-markdown.css';
+@import './../../../static/css/github-markdown.css';
