@@ -52,7 +52,6 @@ export default {
       this.$emit('change', newVal, oldVal);
     },
     steps(steps) {
-      debugger
       steps.forEach((child, index) => {
         child.index = index;
       });

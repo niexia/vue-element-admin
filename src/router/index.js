@@ -1,15 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+Vue.use(Router)
 //home
 const Home = resolve => require(['@/components/home/home'], resolve);
-const HelloWorld = resolve => require(['@/views/HelloWorld'], resolve);
 //组件
+const NoFound = resolve => require(['@/views/NoFound'], resolve);
 const Loading = resolve => require(['@/views/Loading'], resolve);
 const Step = resolve => require(['@/views/Step'], resolve);
-
-Vue.use(Router)
-
-export default new Router({
+// 默认路由
+const router =  new Router({
   routes: [
     {
       path: '/',
@@ -17,14 +16,37 @@ export default new Router({
       component: Home
     },
     {
-      path: '/loading',
-      name: 'Loading',
-      component: Loading,
+      path: '*',
+      comments: NoFound,
     },
-    {
-      path: '/step',
-      name: 'Step',
-      component: Step,
-    }
   ]
-})
+});
+// 动态路由,用于生产菜单
+export const routesMenu = [
+  {
+    path: '/notice',
+    name: 'notice',
+    component: Home,
+    children: [
+      {
+        path: 'loading',
+        name: 'loading组件',
+        component: Loading,
+      }
+    ]
+  },
+  {
+    path: '/navigation',
+    name: 'navigation',
+    component: Home,
+    children: [
+      {
+        path: 'step',
+        name: 'step组件',
+        component: Step,
+      }
+    ]
+  },
+];
+router.addRoutes(routesMenu);
+export default router;

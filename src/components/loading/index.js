@@ -27,7 +27,6 @@ Vue.directive('vccc-loading', {
       var component = new loadingConstructor({
         data: options
       }).$mount()
-      debugger;
       var node = document.querySelector('.vccc-loading')
       if (node && node.parentNode) {
         node.parentNode.removeChild(node)

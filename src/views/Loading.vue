@@ -33,7 +33,6 @@
 
     methods:{
      handleLoadFull(){
-        debugger;
         this.loadingFull = !this.loadingFull;
      }
     },

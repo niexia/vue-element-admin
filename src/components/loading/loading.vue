@@ -20,7 +20,6 @@
   }
 </script>
 <style>
-  @import "../../assets/css/font-awesome.css";
     .vccc-loading{
         position: fixed;
         color:#45B0FF;

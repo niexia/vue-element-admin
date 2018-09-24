@@ -15,20 +15,25 @@ html,body{
 .views__wrapper > .views__slideBar{
   height: 100%;
 }
-.views__wrapper > .views__slideBar > .el-menu-vertical-demo{
+.views__wrapper > .views__slideBar > .views__menu{
   height: 100%;
 }
-.views__wrapper > .views__slideBar > .el-menu-vertical-demo:not(.el-menu--collapse) {
+.views__wrapper > .views__slideBar > .views__menu:not(.el-menu--collapse) {
   width: 200px;
 }
-.views__wrapper > .views__slideBar > .el-menu-vertical-demo > .slideBar__expand{
+.views__wrapper > .views__slideBar > .views__menu > .slideBar__expand{
   height: 50px;
   box-sizing: border-box;
-  padding: 18px 24px;
+  padding: 18px;
   cursor: pointer;
 }
-.views__wrapper > .views__slideBar > .el-menu-vertical-demo > .slideBar__expand .iconfont{
+.views__wrapper > .views__slideBar > .views__menu > .slideBar__expand .iconfont{
   color: #ffffff;
+}
+.views__wrapper > .views__slideBar > .views__menu > .el-submenu .iconfont{
+  position: relative;
+  top: 3px;
+  left: -3px;
 }
 .views__wrapper > .views__content{
   flex: 1;
