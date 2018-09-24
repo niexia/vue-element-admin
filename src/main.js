@@ -3,10 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import installStep from './components/steps/index'
-
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import '@/assets/css/main.css'
+import installComponents from './util/installComponents'
+//注册组件
+Vue.use(ElementUI);
+installComponents(Vue);
 Vue.config.productionTip = false
-installStep(Vue);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

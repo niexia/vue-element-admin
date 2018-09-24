@@ -23,8 +23,6 @@
   </div>
 </template>
 <script>
-import '@/components/loading/index'
-
   export default{
     data() {
       return{

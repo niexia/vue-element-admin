@@ -21,10 +21,5 @@
   }
 </script>
 <style>
-/* @import 'element-ui/lib/theme-chalk/base.css';
-@import 'element-ui/lib/theme-chalk/step.css';
-@import 'element-ui/lib/theme-chalk/step.css'; */
-@import './../assets/css/step.css';
-@import './../assets/css/steps.css';
 </style>
 

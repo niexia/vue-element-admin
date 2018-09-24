@@ -55,5 +55,4 @@
   };
 </script>
 <style>
-  @import '../../assets/css/button.css';
 </style>
