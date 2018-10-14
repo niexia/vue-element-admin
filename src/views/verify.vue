@@ -17,18 +17,12 @@ export default{
     }
   },
   mounted() {
-    //通过plugin添加的实例方法
-    this.$formatDate('2018.10.12');
+    this.$formatDate('2018.10.12'); //通过plugin添加的实例方法
   },
   methods:{
     handleSend(){
       this.sendMessage = '';
-      this.focus = true;
-      this.$nextTick( _ => {
-        this.focus = true;
-        var inputNode = document.getElementsByTagName('input')[0];
-        inputNode.focus();
-      })
+      this.focus = true; //vue指令自动获取焦点
     }
   }
 }  
