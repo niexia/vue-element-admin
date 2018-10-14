@@ -7,6 +7,7 @@ const Home = resolve => require(['@/components/home/home'], resolve);
 const NoFound = resolve => require(['@/views/NoFound'], resolve);
 const Loading = resolve => require(['@/views/Loading'], resolve);
 const Step = resolve => require(['@/views/Step'], resolve);
+const verify = resolve => require(['@/views/verify'], resolve);
 // 默认路由
 const router =  new Router({
   routes: [
@@ -46,6 +47,16 @@ export const routesMenu = [
         component: Step,
       }
     ]
+  },
+  {
+    path: '/verify',
+    name: 'verify',
+    component: Home,
+    children: [{
+      path: 'verify',
+      name: '官方文档验证',
+      component: verify,
+    }]
   },
 ];
 router.addRoutes(routesMenu);

@@ -56,10 +56,12 @@ export default{
       return marked(this.code, {sanitize: true});
     }
   },
+  mounted() {
+  },
   methods:{
     handleLoadFull(){
       this.loadingFull = !this.loadingFull;
-    }
+    },
   },
 }
 </script>
