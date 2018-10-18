@@ -1,5 +1,5 @@
 /*
- * @Description: 以插件的形式注册指令、插件、以及实例属性或者方法
+ * @Description: 以插件的形式注册指令、mixin、以及实例属性或者方法
  * @Author: YangJin
  * @Date: 2018-10-18 11:59:01
  */
