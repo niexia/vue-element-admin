@@ -18,18 +18,14 @@ Vue.directive('views-loading', {
         width = `${width}px`
         Object.assign(options, {top, left, height, width});
       }
-      var component = new loadingConstructor({data: options}).$mount(); //创建loading实例并挂载
       var node = document.querySelector('.views-loading')
-      if (binding.value) { document.querySelector('body').appendChild(component.$el);} 
+      if (binding.value) { 
+        let component = new loadingConstructor({data: options}).$mount(); //创建loading实例并挂载
+        document.querySelector('body').appendChild(component.$el);
+      } 
       else{
         if (node && node.parentNode) { node.parentNode.removeChild(node)}
       }
     }
   }
 })
-/** 
- * Vue.api:
- * Vue.extent()
- * el
- * mouted()
-*/
