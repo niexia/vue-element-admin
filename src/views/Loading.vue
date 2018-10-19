@@ -3,7 +3,7 @@
     <el-row>
       <p><el-button type="text">效果</el-button></p>
       <el-button type="primary" @click="handleLoadFull">全屏loading</el-button>    
-      <p v-views-loading.fullscreen="loadingFull" style="position: relative">
+      <p v-views-loading.fullscreen="loadingFull" style="position: relative; height: 800px;">
         <pre>
           update：所在组件的 VNode 更新时调用，
           但是可能发生在其子 VNode 更新之前。
