@@ -1,7 +1,7 @@
 <script>
 import SubMenu from 'element-ui/lib/submenu';
 import MenuItem from 'element-ui/lib/menu-item';
-import iconMap from '@/util/menuIconMap';
+import iconMap from '@/util/iconMap';
 var render = function(h){
   const r = function(h, data){
     if(data.children && data.children.length){

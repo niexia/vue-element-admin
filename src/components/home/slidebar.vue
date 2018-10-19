@@ -8,7 +8,7 @@
       text-color="#fff"
       active-text-color="#ffd04b">
       <div class="slideBar__expand"  @click="isCollapse = !isCollapse">
-        <i :class="['iconfont', isCollapse ? 'icon-zhankaicelalan' : 'icon-shouhuicelalan']"></i>
+        <i :class="['iconfont', isCollapse ? 'icon-expendMenu' : 'icon-shrinkMenu']"></i>
       </div>
       <slidebar-menu v-for="item in menu" :key="item.path" :data="item"></slidebar-menu>
     </el-menu>

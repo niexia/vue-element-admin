@@ -3,10 +3,16 @@
  * @Author: YangJin
  * @Date: 2018-10-18 11:58:25
  */
-var formatDate = function (date) {
-  if(typeof date != "string") return;
-  else{
-    console.log(date);
+export default{
+  /**
+   * @description: 练习使用... 
+   * @param {String} date
+   * @return: 
+   */
+  $formatDate(date){
+    if (typeof date != "string") return;
+    else {
+      console.log(date);
+    }
   }
-}
-export {formatDate};
+};

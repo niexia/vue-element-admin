@@ -2,18 +2,18 @@
 <div class="content__main">
     <el-row>
       <p><el-button type="text">效果</el-button></p>
-      <el-button type="primary" @click="loadingFull =! loadingFull">全屏loading</el-button>    
-      <p v-vccc-loading.fullscreen="loadingFull" style="position: relative">
-          <pre>
-            update：所在组件的 VNode 更新时调用，
-            但是可能发生在其子 VNode 更新之前。
-            指令的值可能发生了改变，也可能没有。
-            但是你可以通过比较更新前后的值来忽略不必要的模板更新 
-            (详细的钩子函数参数见下)。
-          </pre>
+      <el-button type="primary" @click="handleLoadFull">全屏loading</el-button>    
+      <p v-views-loading.fullscreen="loadingFull" style="position: relative">
+        <pre>
+          update：所在组件的 VNode 更新时调用，
+          但是可能发生在其子 VNode 更新之前。
+          指令的值可能发生了改变，也可能没有。
+          但是你可以通过比较更新前后的值来忽略不必要的模板更新 
+          (详细的钩子函数参数见下)。
+        </pre>
       </p>
       <el-button type="primary" @click="loading = !loading">局部loading</el-button>
-      <p v-vccc-loading="loading" style="position: relative">
+      <p v-views-loading="loading" style="position: relative">
         <pre>
           bind：只调用一次，指令第一次绑定到元素时调用。
           在这里可以进行一次性的初始化设置。
@@ -60,7 +60,10 @@ export default{
   },
   methods:{
     handleLoadFull(){
-      this.loadingFull = !this.loadingFull;
+      this.loadingFull = true;
+      setTimeout(() => {
+        this.loadingFull = false;
+      }, 5000);
     },
   },
 }

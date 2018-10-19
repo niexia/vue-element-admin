@@ -3,12 +3,19 @@
  * @Author: YangJin
  * @Date: 2018-10-18 11:56:51
  */
-var focus = { //自动聚焦
-  update: function (el, {value, oldValue}) {
-    if (value) {
-      var inputNode = el.firstElementChild;
-      inputNode.focus()
+export default{
+  /**
+   * @description: 自动获取焦点,绑定的值为true,就可以focus
+   */
+  focus:{
+    name: 'focus',
+    hooks: {
+      update: function (el, {value,oldValue}) {
+        if (value) {
+          var inputNode = el.firstElementChild;
+          inputNode.focus()
+        }
+      }
     }
   }
 }
-export {focus};

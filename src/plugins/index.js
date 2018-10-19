@@ -3,13 +3,21 @@
  * @Author: YangJin
  * @Date: 2018-10-18 11:59:01
  */
-import {focus} from './drective';
 import mixins from './mixins';
-import {formatDate} from './methods';
-var plugins = {};
+import directives from './drective';
+import methods from './methods';
+let {keys, values, entries} = Object;
+let plugins = {};
 plugins.install = function (Vue, option) {
-  Vue.directive('focus', focus);
+  //混入
   Vue.mixin(mixins);
-  Vue.prototype.$formatDate = formatDate;
+  //注册指令
+  for(let val of values(directives)) {
+    Vue.directive(val.name, val.hooks);
+  }
+  //添加实例方法
+  for (let [key, val] of entries(methods)){
+    Vue.prototype[key] = val;
+  }
 }
 export default plugins;
