@@ -29,12 +29,18 @@
     </el-col>
   </el-row>
   <el-switch v-model="switchVal" active-icon-class="el-icon-success"></el-switch>
+  <p>{{message}}</p>
+  <el-button @click="startWorker">启动worker</el-button>
+  <el-button @click="stopWorker">停止worker</el-button>
 </div>
 </template>
 <script>
+import work from './../util/test.work.js'
 export default{
   data(){
     return{
+      message: '0',
+      worker: '',
       focus: false,
       text: '',
       sendMessage: '',
@@ -65,19 +71,6 @@ export default{
     }
   },
   mounted() {
-    function* dataConsumer() {
-      console.log('Started');
-      console.log(`1. ${yield}`);
-      console.log(`2. ${yield}`);
-      return 'result';
-    }
-    let genObj = dataConsumer();
-    console.log(genObj.next())
-    // Started
-    console.log(genObj.next('a'));
-    // 1. a
-    console.log(genObj.next('b'));
-    // 2. b
   },
   methods:{
     /**
@@ -98,6 +91,19 @@ export default{
     },
     handleChange(val){
       console.log(val);
+    },
+    startWorker(){
+      this.worker = new Worker('./../util/test.work.js');
+      this.worker.onmessage = event => {
+        console.log(event);
+        this.message = event.data;
+      }
+      this.worker.addEventListener("message", function (event) {
+        console.log(event)
+      });
+    },
+    stopWorker(){
+      this.worker.terminate();
     }
   }
 }  
