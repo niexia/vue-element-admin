@@ -4,53 +4,22 @@
       v-bind="$props"
       ref="leftPanel"
       :data="sourceData"
+      :buttonText="buttonTexts[0]"
       :title="titles[0] || t('el.transfer.titles.0')"
-      :default-checked="leftDefaultChecked"
       :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-      @checkable-change="onSourceCheckableChange"
-      @checked-change="onSourceCheckedChange">
-      <slot name="left-footer"></slot>
+      @do-move="addToRight">
     </transfer-panel>
-    <div class="af-transfer__buttons">
-      <af-button
-        :class="['af-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-        @click.native="addAllToRight"
-        :disabled="leftCheck.length === 0">
-        <span v-if="buttonTexts[0] !== undefined">{{ buttonTexts[0] }}</span>
-        <!-- <i class="af-icon-arrow-right"></i> -->
-      </af-button>
-      <af-button
-        :class="['af-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-        @click.native="addToRight"
-        :disabled="leftChecked.length === 0">
-        <span v-if="buttonTexts[1] !== undefined">{{ buttonTexts[1] }}</span>
-        <!-- <i class="af-icon-arrow-right"></i> -->
-      </af-button>
-      <af-button
-        :class="['af-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-        @click.native="addToLeft"
-        :disabled="rightChecked.length === 0">
-        <!-- <i class="af-icon-arrow-left"></i> -->
-        <span v-if="buttonTexts[2] !== undefined">{{ buttonTexts[2] }}</span>
-      </af-button>
-      <af-button
-        :class="['af-transfer__button', hasButtonTexts ? 'is-with-texts' : '']"
-        @click.native="addAllToLeft"
-        :disabled="rightCheck.length === 0">
-        <!-- <i class="af-icon-arrow-left"></i> -->
-        <span v-if="buttonTexts[3] !== undefined">{{ buttonTexts[3] }}</span>
-      </af-button>
+    <div class="af-transfer__link">
+      <i class="af-icon-sort"></i>
     </div>
     <transfer-panel
       v-bind="$props"
       ref="rightPanel"
       :data="targetData"
+      :buttonText="buttonTexts[1]"
       :title="titles[1] || t('el.transfer.titles.1')"
-      :default-checked="rightDefaultChecked"
       :placeholder="filterPlaceholder || t('el.transfer.filterPlaceholder')"
-      @checkable-change="onTargetCheckableChange"
-      @checked-change="onTargetCheckedChange">
-      <slot name="right-footer"></slot>
+      @do-move="addToLeft">
     </transfer-panel>
   </div>
 </template>
@@ -88,7 +57,7 @@
       buttonTexts: {
         type: Array,
         default() {
-          return ['全选', '添加', '移除', '清除'];
+          return ['全选', '清空'];
         }
       },
       filterPlaceholder: {
@@ -96,18 +65,6 @@
         default: ''
       },
       filterMethod: Function,
-      leftDefaultChecked: {
-        type: Array,
-        default() {
-          return [];
-        }
-      },
-      rightDefaultChecked: {
-        type: Array,
-        default() {
-          return [];
-        }
-      },
       renderContent: Function,
       value: {
         type: Array,
@@ -140,10 +97,7 @@
 
     data() {
       return {
-        leftCheck: [],
-        leftChecked: [],
-        rightChecked: [],
-        rightCheck: []
+        rightChecked: []
       };
     },
 
@@ -173,6 +127,7 @@
     },
 
     watch: {
+      // watch value进行广播
       value(val) {
         this.dispatch('AfFormItem', 'el.form.change', val);
       }
@@ -187,84 +142,33 @@
         };
       },
 
-      // 右边checkableData改变的时候
-      onTargetCheckableChange(val) {
-        this.rightCheck = val;
-      },
-
-      // 右边数据改变的时候触发
-      onTargetCheckedChange(val, movedKeys) {
-        this.rightChecked = val;
-        if (movedKeys === undefined) return;
-        this.$emit('right-check-change', val, movedKeys);
-      },
-
-      // 左边数据改变的时候触发
-      onSourceCheckedChange(val, movedKeys) {
-        this.leftChecked = val;
-        if (movedKeys === undefined) return;
-        this.$emit('left-check-change', val, movedKeys);
-      },
-
-      // 左边checkableData改变的时候
-      onSourceCheckableChange(val) {
-        this.leftCheck = val;
-      },
-
-      // 全选
-      addAllToRight() {
-        this.toRight({checkAll: true});
-      },
-
-      // 添加
-      addToRight() {
-        this.toRight({checkAll: false});
-      },
-
-      // 移除
-      addToLeft() {
-        this.toLeft({checkAll: false});
-      },
-
-      // 清除
-      addAllToLeft() {
-        this.toLeft({checkAll: true});
-      },
-
-      // 向右
-      toRight({checkAll = false}) {
-        const type = checkAll ? 'leftCheck' : 'leftChecked';
+      // 向左移动
+      addToLeft(moveList) {
         let currentValue = this.value.slice();
-        const itemsToBeMoved = [];
+        let itemsToBeMoved = [];
         const key = this.props.key;
-        this.data.forEach(item => {
-          const itemKey = item[key];
-          if (
-            this[type].indexOf(itemKey) > -1 &&
-            this.value.indexOf(itemKey) === -1
-          ) {
-            itemsToBeMoved.push(itemKey);
-          }
-        });
-        currentValue = this.targetOrder === 'unshift'
-          ? itemsToBeMoved.concat(currentValue)
-          : currentValue.concat(itemsToBeMoved);
-        this.$emit('input', currentValue);
-        this.$emit('change', currentValue, 'right', this[type]);
-      },
-
-      // 向左
-      toLeft({checkAll = false}) {
-        const type = checkAll ? 'rightCheck' : 'rightChecked';
-        let currentValue = this.value.slice();
-        this[type].forEach(item => {
+        itemsToBeMoved = moveList.map(item => item[key]);
+        itemsToBeMoved.forEach(item => {
           const index = currentValue.indexOf(item);
           if (index > -1) {
             currentValue.splice(index, 1);
           }
         });
         this.$emit('input', currentValue);
-        this.$emit('change', currentValue, 'left', this[type]);
+        this.$emit('change', currentValue, 'left', itemsToBeMoved);
+      },
+
+      // 向右移动
+      addToRight(moveList) {
+        let currentValue = this.value.slice();
+        let itemsToBeMoved = [];
+        const key = this.props.key;
+        itemsToBeMoved = moveList.map(item => item[key]);
+        currentValue = this.targetOrder === 'unshift'
+          ? itemsToBeMoved.concat(currentValue)
+          : currentValue.concat(itemsToBeMoved);
+        this.$emit('input', currentValue);
+        this.$emit('change', currentValue, 'right', itemsToBeMoved);
       },
 
       // 清空搜索条件

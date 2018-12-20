@@ -1,10 +1,10 @@
 <template>
-  <div :id="panelId" class="af-transfer-panel">
-    <div :class="['af-transfer-panel__header', isScroll && 'is-panel-scroll']">
-      <p class="af-transfer-panel__title">
-        {{title}}
-        <af-button size="small" class="af-transfer-panel__button" :disabled="moveableData.length === 0" @click="addAllToAnother">{{ buttonText }}</af-button>
-      </p>
+  <div class="af-transfer-panel">
+    <p class="af-transfer-panel__header">
+      {{title}}
+    </p>
+    
+    <div :class="['af-transfer-panel__body', 'is-with-footer', filterable && 'is-with-filter']">
       <af-input
         class="af-transfer-panel__filter"
         v-model="query"
@@ -13,32 +13,29 @@
         @mouseenter.native="inputHover = true"
         @mouseleave.native="inputHover = false"
         v-if="filterable">
-        <i slot="suffix"
+        <i slot="prefix"
           :class="['af-input__icon', 'af-icon-' + inputIcon]"
           @click="clearQuery"
         ></i>
       </af-input>
-    </div>
-    <div :class="['af-transfer-panel__body', 'is-with-footer', filterable && 'is-with-filter']">
-      <ul
+      <af-checkbox-group
+        v-model="checked"
         v-show="!hasNoMatch && data.length > 0"
+        :class="{ 'is-filterable': filterable }"
         class="af-transfer-panel__list">
         <af-scrollbar
-          wrap-class="af-transfer-panel__wrap"
-          view-class="af-transfer-panel__view">
-          <li
+          wrap-class="af-checkbox-group__wrap"
+          view-class="af-checkbox-group__list">
+          <af-checkbox
             class="af-transfer-panel__item"
+            :label="item[keyProp]"
+            :disabled="item[disabledProp]"
             :key="item[keyProp]"
             v-for="item in filteredData">
-            <af-button type="text" class="af-transfer-panel__button"
-              :disabled="item[disabledProp]"
-              @click="addToAnother(item)">
-              <!-- {{item[labelProp]}} -->
-              <option-content :option="item"></option-content>
-            </af-button>
-          </li>
+            <option-content :option="item"></option-content>
+          </af-checkbox>
         </af-scrollbar>
-      </ul>
+      </af-checkbox-group>
       <p
         class="af-transfer-panel__empty"
         v-show="hasNoMatch">{{ t('el.transfer.noMatch') }}</p>
@@ -53,10 +50,11 @@
 </template>
 
 <script>
+  import AfCheckboxGroup from 'aui/packages/checkbox-group';
+  import AfCheckbox from 'aui/packages/checkbox';
   import AfInput from 'aui/packages/input';
-  import AfButton from 'aui/packages/button';
   import Locale from 'aui/src/mixins/locale';
-  import { generateId } from 'aui/src/utils/util';
+
   export default {
     mixins: [Locale],
 
@@ -65,8 +63,9 @@
     componentName: 'AfTransferPanel',
 
     components: {
+      AfCheckboxGroup,
+      AfCheckbox,
       AfInput,
-      AfButton,
       OptionContent: {
         props: {
           option: Object
@@ -103,27 +102,76 @@
       renderContent: Function,
       placeholder: String,
       title: String,
-      buttonText: '',
       filterable: Boolean,
       format: Object,
       filterMethod: Function,
+      defaultChecked: Array,
       props: Object
     },
 
     data() {
       return {
+        checked: [],
+        allChecked: false,
         query: '',
         inputHover: false,
-        isScroll: false,
-        timeoutId: '',
-        scrollPanel: ''
+        checkChangeByUser: true
       };
     },
 
-    computed: {
-      panelId() {
-        return `af-transfer-panel-${generateId()}`;
+    watch: {
+      checked(val, oldVal) {
+        if (this.checkChangeByUser) {
+          // 过滤出移动的keys
+          const movedKeys = val.concat(oldVal)
+            .filter(v => val.indexOf(v) === -1 || oldVal.indexOf(v) === -1);
+          this.$emit('checked-change', val, movedKeys);
+        } else {
+          this.$emit('checked-change', val);
+          this.checkChangeByUser = true;
+        }
       },
+
+      data() {
+        // 绑定的数据改变之后，checked过滤掉不存在的数据
+        const checked = [];
+        const filteredDataKeys = this.filteredData.map(item => item[this.keyProp]);
+        this.checked.forEach(item => {
+          if (filteredDataKeys.indexOf(item) > -1) {
+            checked.push(item);
+          }
+        });
+        this.checkChangeByUser = false;
+        this.checked = checked;
+      },
+
+      checkableData: {
+        handler: function(val) {
+          this.$emit('checkable-change', val.map(item => item[this.keyProp]));
+        },
+        immediate: true
+      },
+
+      defaultChecked: {
+        // 已绑定就触发，并不是直接复制给checked，而是先过滤出可以勾选的
+        immediate: true,
+        handler(val, oldVal) {
+          if (oldVal && val.length === oldVal.length &&
+            val.every(item => oldVal.indexOf(item) > -1)) return;
+          const checked = [];
+          const checkableDataKeys = this.checkableData.map(item => item[this.keyProp]);
+          val.forEach(item => {
+            if (checkableDataKeys.indexOf(item) > -1) {
+              checked.push(item);
+            }
+          });
+          this.checkChangeByUser = false;
+          this.checked = checked;
+        }
+      }
+    },
+
+    computed: {
       /**
        * @description: 获取checkbook的选项数据
        * @return: 返回过滤之后的数据
@@ -142,24 +190,27 @@
       },
 
       /**
-       * @description: 获取可以移动的数据
-       * @return: 包含可移动数据的一个数组
+       * @description: 过滤掉不可勾选的数据，获取可勾选的数据
+       * @return: 可以勾选的数据
        */
-      moveableData() {
+      checkableData() {
         return this.filteredData.filter(item => !item[this.disabledProp]);
       },
 
       /**
-       * @description: 已选择的数量
+       * @description: 勾选统计
        * @return: 统计的结果
        */
       checkedSummary() {
-        let dataLength = this.data.length;
-        const total = this.format.total;
-        if (total) {
-          return total.replace(/\${total}/g, dataLength);
+        const checkedLength = this.checked.length;
+        const dataLength = this.data.length;
+        const { noChecked, hasChecked } = this.format;
+        if (noChecked && hasChecked) {
+          return checkedLength > 0
+            ? hasChecked.replace(/\${checked}/g, checkedLength).replace(/\${total}/g, dataLength)
+            : noChecked.replace(/\${total}/g, dataLength);
         } else {
-          return `共${dataLength}个`;
+          return `${ checkedLength }/${ dataLength }`;
         }
       },
 
@@ -206,29 +257,7 @@
       }
     },
 
-    mounted() {
-      // 滚动加阴影
-      this.scrollPanel = document.querySelector(`#${this.panelId} .af-transfer-panel__wrap`);
-      this.scrollPanel && this.scrollPanel.addEventListener('scroll', this.scrollHandler);
-    },
-
-    beforeDestroy() {
-      this.removeScrollHandler();
-    },
-
     methods: {
-      /**
-       * @description: 点击全选的处理
-       * @param {boolean}
-       */
-      addAllToAnother(value) {
-        this.$emit('do-move', this.moveableData);
-      },
-
-      addToAnother(item) {
-        this.$emit('do-move', [item]);
-      },
-
       /**
        * @description: 清除搜索输入框的内容
        */
@@ -236,30 +265,6 @@
         if (this.inputIcon === 'circle-close') {
           this.query = '';
         }
-      },
-
-      /**
-       * @description: panel滚动事件处理
-       * @param {Object} event 滚动事件对象
-       */
-      scrollHandler(event) {
-        let target = event.target;
-        let top1 = target.scrollTop;
-        this.isScroll = true;
-        clearTimeout(this.timeoutId);
-        this.timeoutId = setTimeout(() => {
-          let top2 = target.scrollTop;
-          if (top1 === top2) {
-            this.isScroll = false;
-          }
-        }, 500);
-      },
-
-      /**
-       * @description: 清除滚动事件
-       */
-      removeScrollHandler() {
-        this.scrollPanel && this.scrollPanel.removeEventListener('scroll', this.scrollHandler);
       }
     }
   };
