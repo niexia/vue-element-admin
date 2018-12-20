@@ -1,0 +1,171 @@
+@import "mixins/mixins";
+@import "mixins/utils";
+@import "common/var";
+@import "input";
+@import "button";
+@import "checkbox";
+@import "checkbox-group";
+
+@include b(transfer) {
+  font-size: $--font-size-mini;
+
+  @include e(link) {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 20px;
+  }
+}
+
+@include b(transfer-panel) {
+  border: 1px solid $--transfer-border-color;
+  border-radius: $--transfer-border-radius;
+  overflow: hidden;
+  background: $--color-white;
+  display: inline-block;
+  vertical-align: middle;
+  width: $--transfer-panel-width;
+  max-height: 100%;
+  box-sizing: border-box;
+  position: relative;
+
+  @include e(header) {
+    padding-bottom: 5px;
+    border-bottom: 1px solid $--transfer-border-color;
+    @include when(panel-scroll) {
+      box-shadow: 0 1px 1px #f7f7f7;
+    }
+    .af-transfer-panel__title {
+      position: relative;
+      height: $--transfer-panel-header-height;
+      line-height: $--transfer-panel-header-height;
+      margin: 0;
+      box-sizing: border-box;
+      color: $--color-black;
+      text-align: center;
+      color: $--color-text-secondary;
+
+      & .af-transfer-panel__button {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        padding: 3px 5px;
+      }
+    }
+
+    .af-transfer-panel__filter {
+      text-align: center;
+      margin: 0 10px;
+      box-sizing: border-box;
+      display: block;
+      width: auto;
+
+      .af-input__inner {
+        height: $--transfer-operate-height;
+        width: 100%;
+        font-size: 12px;
+        display: inline-block;
+        box-sizing: border-box;
+        border-radius: 4px;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+
+      .af-input__icon {
+        margin-left: 5px;
+        line-height: $--transfer-operate-height;
+      }
+
+      .af-icon-circle-close {
+        cursor: pointer;
+      }
+    }
+  }
+
+  @include e(body) {
+    height: $--transfer-panel-body-height;
+    @include when(with-footer) {
+      padding-bottom: $--transfer-panel-footer-height;
+    }
+  }
+
+  @include e(list) {
+    margin: 0;
+    list-style: none;
+    height: $--transfer-panel-body-height;
+    padding: 0;
+    box-sizing: border-box;
+
+    .af-transfer-panel__wrap {
+      max-height: #{$--transfer-panel-body-height + 17px};
+      .af-transfer-panel__view {
+        list-style: none;
+        margin: 0;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  @include e(item) {
+    height: $--transfer-item-height;
+    line-height: $--transfer-item-height;
+    padding-left: 10px;
+    display: block;
+    &:hover {
+      background-color: #ddf4ff;
+    }
+    .af-transfer-panel__button {
+      font-size: 12px;
+      color: $--color-text-regular;
+      padding: 0;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+    }
+  }
+
+  .af-transfer-panel__footer {
+    height: $--transfer-panel-footer-height;
+    line-height: $--transfer-panel-footer-height;
+    background: $--transfer-panel-footer-background;
+    margin: 0;
+    padding: 0 10px;
+    border-top: 1px solid $--transfer-border-color;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: $--index-normal;
+    box-sizing: border-box;
+    color: $--color-text-secondary;
+    @include utils-vertical-center;
+
+    .af-checkbox {
+      padding-left: 20px;
+      color: $--color-text-regular;
+    }
+  }
+
+  .af-transfer-panel__empty {
+    margin: 0;
+    height: $--transfer-item-height;
+    line-height: $--transfer-item-height;
+    padding: 6px 15px 0;
+    color: $--color-text-secondary;
+    text-align: center;
+  }
+
+  .af-checkbox__label {
+    padding-left: 8px;
+  }
+
+  .af-checkbox__inner {
+    height: 14px;
+    width: 14px;
+    border-radius: 3px;
+    &::after {
+      height: 6px;
+      width: 3px;
+      left: 4px;
+    }
+  }
+}
