@@ -73,22 +73,22 @@
 .p_r30{padding-right:30px;}
 
 /* color */
-f_success{ color: #67C23A;}
-f_warning{ color: #E6A23C;}
-f_error{ color: #F56C6C;}
-f_info{ color: #909399;}
-f_normal1{ color: #303133;}
-f_normal2{ color: #606266;}
-f_normal3{ color: #909399;}
-f_normal4{ color: #C0C4CC;}
-b_success{ background-color: #67C23A;}
-b_warning{ background-color: #E6A23C;}
-b_error{ background-color: #F56C6C;}
-b_info{ background-color: #909399;}
-b_normal1{ background-color: #DCDFE6;}
-b_normal2{ background-color: #E4E7ED;}
-b_normal3{ background-color: #EBEEF5;}
-b_normal4{ background-color: #F2F6FC;}
+.f_success{ color: #67C23A;}
+.f_warning{ color: #E6A23C;}
+.f_error{ color: #F56C6C;}
+.f_info{ color: #909399;}
+.f_normal1{ color: #303133;}
+.f_normal2{ color: #606266;}
+.f_normal3{ color: #909399;}
+.f_normal4{ color: #C0C4CC;}
+.b_success{ background-color: #67C23A;}
+.b_warning{ background-color: #E6A23C;}
+.b_error{ background-color: #F56C6C;}
+.b_info{ background-color: #909399;}
+.b_normal1{ background-color: #DCDFE6;}
+.b_normal2{ background-color: #E4E7ED;}
+.b_normal3{ background-color: #EBEEF5;}
+.b_normal4{ background-color: #F2F6FC;}
 
 /* form */
 input[type="text"]:focus,input[type="password"]:focus,textarea:focus{color: inherit;}

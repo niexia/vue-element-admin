@@ -22,7 +22,7 @@ const router =  new Router({
     },
   ]
 });
-// 动态路由,用于生产菜单
+// 动态路由,并用于生成菜单
 export const routesMenu = [
   {
     path: '/notice',

@@ -1,5 +1,3 @@
-import './../components/loading/index'
-import installStep from './../components/steps/index'
-export default function(Vue){
-  installStep(Vue);
+export default function install(Vue) {
+  
 }
