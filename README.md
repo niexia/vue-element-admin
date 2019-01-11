@@ -1,8 +1,6 @@
 # admin-system
 
-> 后台管理系统
-
-## 开始使用
+### 开始使用
 
 ``` bash
 # install dependencies
@@ -18,4 +16,5 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 多客户配置
+
