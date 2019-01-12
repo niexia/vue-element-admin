@@ -511,3 +511,10 @@ npm run build:C2
 
 npm run build --report
 ```
+
+### 参考
+- [NodeJs/Vue项目中对process.env的使用](https://www.jianshu.com/p/07fda339f57e)
+- [process.env.NODE_ENV](https://www.jianshu.com/p/ce8f405935b9)
+- [DefinePlugin](https://webpack.docschina.org/plugins/define-plugin/)
+- [webpack.DefinePlugin](https://segmentfault.com/q/1010000007464696/a-1020000007466991)
+- [模式(mode)](https://webpack.docschina.org/concepts/mode/)
