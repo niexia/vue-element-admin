@@ -7,7 +7,7 @@ Vue.use(Router)
 
 const Home = resolve => require(['@/components/home/home'], resolve);
 const NoFound = resolve => require(['@/views/NoFound'], resolve);
-const Loading = resolve => require(['@/views/C2/Loading'], resolve);
+const Loading = resolve => require(['@/views/Loading'], resolve);
 const Step = resolve => require(['@/views/Step'], resolve);
 const verify = resolve => require(['@/views/verify'], resolve);
 
