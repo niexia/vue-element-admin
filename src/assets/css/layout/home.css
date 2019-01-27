@@ -49,5 +49,6 @@ html,body{
 .views__wrapper > .views__content > .content__main{
   height: calc(100% - 50px);
   padding: 10px 20px;
+  box-sizing: border-box;
   overflow: auto;
 }
