@@ -3,7 +3,7 @@
     <p>组件学习</p>
     <el-tooltip effect="dark" content="关于我(Github)" placement="left-start">
       <div class="about">
-        <a href="https://github.com/KingYouge" target="_blank"></a>
+        <a href="https://github.com/yangseas" target="_blank"></a>
       </div>
     </el-tooltip>
   </div>
@@ -25,7 +25,7 @@ export default {
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  background: url("./../../assets/imgs/icon-me.jpg") center no-repeat;
+  background: url("./../../assets/imgs/icon-me.png") center no-repeat;
   background-size: 100% 100%;
   cursor: pointer;
 }
