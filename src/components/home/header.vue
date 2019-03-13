@@ -25,7 +25,7 @@ export default {
   height: 40px;
   width: 40px;
   border-radius: 50%;
-  background: url("./../../assets/imgs/icon-me.png") center no-repeat;
+  background: url("./../../assets/imgs/icon__logo.png") center no-repeat;
   background-size: 100% 100%;
   cursor: pointer;
 }
