@@ -93,3 +93,12 @@
 /* form */
 input[type="text"]:focus,input[type="password"]:focus,textarea:focus{color: inherit;}
 input[type="button"]:hover,button:hover{filter:alpha(opacity=80);opacity:0.8;}
+
+/* icon */
+[class*='icon-'] {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

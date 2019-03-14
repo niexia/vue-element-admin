@@ -41,14 +41,15 @@ html,body{
 }
 .views__wrapper > .views__content{
   flex: 1;
+  overflow: auto;
 }
 .views__wrapper > .views__content > .content__header{
-  height: 50px;
-  border-bottom: 1px solid #E8E8E8;
+  height: 60px;
 }
 .views__wrapper > .views__content > .content__main{
-  height: calc(100% - 50px);
-  padding: 10px 20px;
+  min-height: calc(100% - 60px);
+  color: #666;
+  padding: 20px;
+  background: #f7f8fa;
   box-sizing: border-box;
-  overflow: auto;
 }
