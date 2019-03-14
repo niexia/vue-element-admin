@@ -4,6 +4,7 @@ Vue.use(Router)
 //home
 const Home = resolve => require(['@/components/home/home'], resolve);
 //组件
+const Login = resolve => require(['@/views/Login/login'], resolve);
 const NoFound = resolve => require(['@/views/NoFound'], resolve);
 const Loading = resolve => require(['@/views/Loading'], resolve);
 const Step = resolve => require(['@/views/Step'], resolve);
@@ -13,8 +14,13 @@ const router =  new Router({
   routes: [
     {
       path: '/',
-      name: '首页',
-      component: Home
+      redirect: '/login',
+      component: Login
+    },
+    {
+      path: '/login',
+      name: '登录',
+      component: Login
     },
     {
       path: '*',
