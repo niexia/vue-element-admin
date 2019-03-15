@@ -16,15 +16,31 @@
         </p>
       </div>
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item><i class="icon-person"></i>个人中心</el-dropdown-item>
-        <el-dropdown-item><i class="icon-log-out"></i>退出登录</el-dropdown-item>
+        <el-dropdown-item>
+          <p><i class="icon-person"></i>个人中心</p>
+        </el-dropdown-item>
+        <el-dropdown-item>
+          <p @click="handleLogout"><i class="icon-log-out"></i>退出登录</p>
+        </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
 </template>
 <script>
 export default {
-  
+  data () {
+    return {
+      
+    }
+  },
+  methods: {
+    /**
+     * 退出登录，路由跳转到登录页
+     */
+    handleLogout() {
+      this.$router.push("/login");
+    }
+  },
 }
 </script>
 <style>
