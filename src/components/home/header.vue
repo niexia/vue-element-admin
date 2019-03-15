@@ -11,8 +11,8 @@
       <div class="user__profile">
         <img src="./../../assets/imgs/icon__logo.png">
         <p>
-          <span style="font-size: 13px;">杨小文</span><br>
-          <span style="font-size: 12px;">技术部</span>
+          <span style="font-size: 13px;">YangJin</span><br>
+          <span style="font-size: 12px;">前端开发工程师</span>
         </p>
       </div>
       <el-dropdown-menu slot="dropdown">
