@@ -12,7 +12,7 @@
         <img src="./../../assets/imgs/icon__logo.png">
         <p>
           <span style="font-size: 13px;">YangJin</span><br>
-          <span style="font-size: 12px;">前端开发工程师</span>
+          <span style="font-size: 12px;">前端开发</span>
         </p>
       </div>
       <el-dropdown-menu slot="dropdown">
@@ -50,6 +50,7 @@ export default {
   align-items: center;
   box-sizing: border-box;
   padding: 5px 20px;
+  box-shadow: 0 1px 4px 0 rgba(0,21,41,.08)
 }
 .content__header .header__navbar {
   flex: 1;

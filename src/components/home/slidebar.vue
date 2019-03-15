@@ -1,14 +1,13 @@
 <template>
   <div class="views__slideBar">
     <el-menu
-      class="views__menu"
+      :class="['views__menu', isCollapse && 'is-collapse']"
       :collapse="isCollapse"
       @select="handleSelect"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b">
+      text-color="#656C75"
+      active-text-color="#428EEF">
       <div class="slideBar__expand"  @click="isCollapse = !isCollapse">
-        <i :class="['iconfont', isCollapse ? 'icon-menu-' : 'icon-menu-arrow']"></i>
+        <i :class="[isCollapse ? 'icon-menu' : 'icon-menu-arrow']"></i>
       </div>
       <slidebar-menu v-for="item in menu" :key="item.path" :data="item"></slidebar-menu>
     </el-menu>
@@ -37,10 +36,17 @@ export default {
 <style>
 .views__slideBar {
   overflow: auto;
+  box-shadow: 0 2px 4px rgba(0,21,41,.08);
 }
-.views__slideBar .el-submenu__title [class^='icon-']{
-  margin-right: 8px;
+.views__slideBar .el-menu {
+  border-right: none;
+}
+.views__slideBar .el-menu .slideBar__expand {
+  color: #656C75;
+}
+.views__slideBar .el-menu .el-submenu__title [class^='icon-']{
+  margin:0 8px 0 3px;
   font-size: 18px;
-  color: #fff;
+  color: #656C75;
 }
 </style>
