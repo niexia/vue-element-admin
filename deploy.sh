@@ -11,6 +11,6 @@ git add -A
 git commit -m 'deploy'
 
 # 部署到 github
-git push -f https://github.com/yangseas/admin-system.git/admin-system master:gh-pages
+git push -f https://github.com/yangseas/admin-system.git master:gh-pages
 
 cd -
