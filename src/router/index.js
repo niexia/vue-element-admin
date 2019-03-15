@@ -22,7 +22,7 @@ const formDetail = resolve => require(['@/views/formApplication/formDetail.vue']
 // extendComponent
 const DocViewer = resolve => require(['@/views/extendComponent/docViewer.vue'], resolve);
 const ImageViewer = resolve => require(['@/views/extendComponent/imageViewer.vue'], resolve);
-const MapUse = resolve => require(['@/views/extendComponent/map.vue'], resolve);
+const Maps = resolve => require(['@/views/extendComponent/map.vue'], resolve);
 const MarkdownEditor = resolve => require(['@/views/extendComponent/markdownEditor.vue'], resolve);
 
 // systemSetting
@@ -58,11 +58,11 @@ const router =  new Router({
 // dynamic router
 export const routesMenu = [{
   path: '/home',
-  name: '首页',
+  name: 'HOME',
   component: Home,
   children: [{
-    path: '/',
-    name: '首页',
+    path: 'dashboard',
+    name: 'dashboard',
     component: Dashboard,
   }]
 }, {
@@ -106,7 +106,7 @@ export const routesMenu = [{
   }, {
     path: 'map',
     name: '地图应用',
-    component: MapUse,
+    component: Maps,
   }, {
     path: 'markdownEditor',
     name: 'Markdown编辑器',
