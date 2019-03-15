@@ -7,7 +7,7 @@
           <el-input placeholder="请输入用户名" v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item label="">
-          <el-input placeholder="请输入密码" type="password" v-model="form.password"></el-input>
+          <el-input placeholder="请输入密码" type="password" v-model="form.password" @keyup.enter.native="handleSubmit"></el-input>
         </el-form-item>
       </el-form>
       <p class="login__hint">忘记密码?</p>
@@ -28,12 +28,15 @@ export default {
     }
   },
   methods: {
+    /**
+     * 登录之后调整到第一个菜单页
+     */
     handleSubmit() {
       this.$message({
         message: '登录成功',
         type: 'success'
       });
-      this.$router.push('/notice');
+      this.$router.push('/home');
     }
   }
 }
@@ -43,7 +46,7 @@ export default {
     position: relative;
     height: 100%;
     background: url('../../assets/imgs/login_bg.jpg') center center no-repeat;
-    background-size: 100% 100%;
+    background-size: cover;
   }
   .login__content {
     position: absolute;

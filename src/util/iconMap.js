@@ -1,10 +1,20 @@
 export default {
   iconMap: {
-    notice: 'iconfont icon-unlock',
-    navigation: 'iconfont icon-settings',
+    home: 'icon-home',
+    table: 'icon-layout',
+    form: 'icon-file-text',
+    extend: 'icon-cube',
+    setting: 'icon-settings',
+    exception: 'icon-close-square',
   },
-  getIcon: function(index){
-    index = index.replace('/', '');
-    return this.iconMap[index] ? this.iconMap[index] : 'iconfont icon-at';
+  /**
+   * 根据路由地址获取菜单的icon
+   * 
+   * @param {String} path 一级菜单的地址
+   * @return {String} iconClass 图标对应的class
+   */
+  getIcon: function(path){
+    path = path.replace('/', '');
+    return this.iconMap[path] ? this.iconMap[path] : 'icon-star';
   }
 }

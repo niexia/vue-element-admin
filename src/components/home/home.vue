@@ -3,7 +3,9 @@
     <slidebar></slidebar>
     <div class="views__content">
       <content-header></content-header>
-      <router-view></router-view>
+      <div class="content__main">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>

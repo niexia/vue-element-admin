@@ -35,7 +35,12 @@ export default {
 }
 </script>
 <style>
-.views__header{
-  height: 40px;
+.views__slideBar {
+  overflow: auto;
+}
+.views__slideBar .el-submenu__title [class^='icon-']{
+  margin-right: 8px;
+  font-size: 18px;
+  color: #fff;
 }
 </style>
