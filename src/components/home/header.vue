@@ -11,7 +11,7 @@
       <div class="user__profile">
         <img src="./../../assets/imgs/icon__logo.jpg">
         <p>
-          <span style="font-size: 13px;">admin</span><br>
+          <span style="font-size: 13px;">Yang</span><br>
           <span style="font-size: 12px;">技术部</span>
         </p>
       </div>
