@@ -2,17 +2,17 @@
   <div class="content__header">
     <div class="header__navbar">
       <ul class="navbar__menu">
-        <li class="menu__item"><i class="icon-home p_r10"></i>首页</li>
-        <li class="menu__item"><i class="icon-email p_r10"></i>反馈</li>
-        <li class="menu__item"><i class="icon-question-mark-circle p_r10"></i>帮助</li>
+        <li class="menu__item"><i class="icon-home pr-10"></i>首页</li>
+        <li class="menu__item"><i class="icon-email pr-10"></i>反馈</li>
+        <li class="menu__item"><i class="icon-question-mark-circle pr-10"></i>帮助</li>
     </ul>
     </div>
     <el-dropdown class="header__user">
       <div class="user__profile">
-        <img src="./../../assets/imgs/icon__logo.png">
+        <img src="./../../assets/imgs/icon__logo.jpg">
         <p>
-          <span style="font-size: 13px;">YangJin</span><br>
-          <span style="font-size: 12px;">前端开发</span>
+          <span style="font-size: 13px;">admin</span><br>
+          <span style="font-size: 12px;">技术部</span>
         </p>
       </div>
       <el-dropdown-menu slot="dropdown">

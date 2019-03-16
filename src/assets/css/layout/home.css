@@ -47,9 +47,14 @@ html,body{
   height: 60px;
 }
 .views__wrapper > .views__content > .content__main{
-  min-height: calc(100% - 60px);
-  color: #666;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 60px);
+}
+.views__wrapper>.views__content>.content__main > div {
+  flex: 1;
   padding: 20px;
-  background: #f7f8fa;
   box-sizing: border-box;
+  background: #f7f8fa;
+  color: #666;
 }
