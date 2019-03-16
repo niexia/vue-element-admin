@@ -1,8 +1,8 @@
 {
-  "name": "vue-components",
+  "name": "admin-system",
   "version": "1.0.0",
-  "description": "vue component develop",
-  "author": "KingYouge",
+  "description": "基于 vue 和 elementUI 组件库的中后端系统",
+  "author": "yangseas",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -13,8 +13,10 @@
     "deploy": "deploy.sh"
   },
   "dependencies": {
+    "echarts": "^4.1.0",
     "element-ui": "^2.4.7",
     "vue": "^2.5.2",
+    "vue-echarts": "^4.0.1",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

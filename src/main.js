@@ -8,12 +8,17 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/css/main.css'
 import installComponents from './util/installComponents'
 import installPlugins from './plugins/index'
-//注册组件
+import Echarts from 'vue-echarts'
+
+// register components
 Vue.use(ElementUI);
+Vue.component('v-chart', Echarts);
 installComponents(Vue);
-//注册插件
+
+// register plugin
 Vue.use(installPlugins);
 Vue.config.productionTip = false
+
 new Vue({
   el: '#app',
   router,
