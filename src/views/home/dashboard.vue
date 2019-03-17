@@ -35,13 +35,13 @@
         <div class="personal__todo">
           <p class="title">代办事项</p>
           <div class="todo__info">
-            <el-badge :value="12" class="todo__item"  type="primary">
+            <el-badge :value="12" class="todo__item" type="primary">
               <el-button size="small">公众号评论</el-button>
             </el-badge>
-            <el-badge :value="3" class="todo__item"  type="primary">
+            <el-badge :value="3" class="todo__item" type="warning">
               <el-button size="small">客户回复</el-button>
             </el-badge>
-            <el-badge :value="5" class="todo__item"  type="primary">
+            <el-badge :value="5" class="todo__item">
               <el-button size="small">会议</el-button>
             </el-badge>
           </div>
@@ -54,14 +54,14 @@
         <p>访问走势</p>
         <v-chart 
           :autoresize="true" 
-          :options="line"
+          :options="visitTrade"
         />
       </div>
       <div class="col col-2">
         <p>发布次数</p>
         <v-chart 
           :autoresize="true" 
-          :options="line"
+          :options="releaseTime"
         />
       </div>
     </section>
@@ -70,26 +70,30 @@
         <p>时间分配</p>
         <v-chart 
           :autoresize="true" 
-          :options="line"
+          :options="timeManagement"
         />
       </div>
       <div class="col col-2">
         <p>任务状态</p>
         <v-chart 
           :autoresize="true" 
-          :options="line"
+          :options="taskState"
         />
       </div>
     </section>
   </div>
 </template>
 <script>
-import 'echarts/lib/chart/line'
-// import 'echarts/lib/component/polar'
-
+import 'echarts/lib/chart/line';
+import 'echarts/lib/chart/bar';
+import 'echarts/lib/chart/pie';
 export default {
   data () {
-    var data = [["2000-06-05",116],["2000-06-06",129],["2000-06-07",135],["2000-06-08",86],["2000-06-09",73],["2000-06-10",85],["2000-06-11",73],["2000-06-12",68],["2000-06-13",92],["2000-06-14",130],["2000-06-15",245],["2000-06-16",139],["2000-06-17",115],["2000-06-18",111],["2000-06-19",309],["2000-06-20",206],["2000-06-21",137],["2000-06-22",128],["2000-06-23",85],["2000-06-24",94],["2000-06-25",71],["2000-06-26",106],["2000-06-27",84],["2000-06-28",93],["2000-06-29",85],["2000-06-30",73],["2000-07-01",83],["2000-07-02",125],["2000-07-03",107],["2000-07-04",82],["2000-07-05",44],["2000-07-06",72],["2000-07-07",106],["2000-07-08",107],["2000-07-09",66],["2000-07-10",91],["2000-07-11",92],["2000-07-12",113],["2000-07-13",107],["2000-07-14",131],["2000-07-15",111],["2000-07-16",64],["2000-07-17",69],["2000-07-18",88],["2000-07-19",77],["2000-07-20",83],["2000-07-21",111],["2000-07-22",57],["2000-07-23",55],["2000-07-24",60]];
+    var data = [
+      ["2019-01",80], ["2019-02",129], ["2019-03",135], ["2019-04",170],
+      ["2019-03",140], ["2019-03",150], ["2019-03",138], ["2019-03",180],
+      ["2019-03",150], ["2019-03",120], ["2019-03",140], ["2019-03",135]
+    ];
     var dateList = data.map(function (item) {
         return item[0];
     });
@@ -97,10 +101,12 @@ export default {
         return item[1];
     });
     return {
+      // 标签
       tags: ['JavaScaipt', 'Vue', '前端工程化', 'Express', 'Java', 'Spring', 'React?'],
       inputVisible: false,
       inputValue: '',
-      line: {
+      // 访问走势
+      visitTrade: {
         visualMap: [{
           show: false,
           type: 'continuous',
@@ -124,21 +130,257 @@ export default {
           showSymbol: false,
           data: valueList
         }]
+      }, 
+      // 发布次数
+      releaseTime: {
+        legend: {},
+        tooltip: {},
+        dataset: {
+          source: [
+            ['product', '2015', '2016', '2017'],
+            ['Matcha Latte', 43.3, 85.8, 93.7],
+            ['Milk Tea', 83.1, 73.4, 55.1],
+            ['Cheese Cocoa', 86.4, 65.2, 82.5],
+            ['Walnut Brownie', 72.4, 53.9, 39.1]
+          ]
+        },
+        xAxis: {type: 'category'},
+        yAxis: {},
+        // Declare several bar series, each will be mapped
+        // to a column of dataset.source by default.
+        series: [
+          {type: 'bar'},
+          {type: 'bar'},
+          {type: 'bar'}
+        ]
+      },
+      // 时间分配
+      timeManagement: {
+        tooltip: {
+          trigger: 'item',
+          formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+          orient: 'vertical',
+          x: 'left'
+        },
+        series: [
+          {
+            name:'访问来源',
+            type:'pie',
+            selectedMode: 'single',
+            radius: [0, '30%'],
+
+            label: {
+              normal: {
+                position: 'inner'
+              }
+            },
+            labelLine: {
+              normal: {
+                show: false
+              }
+            },
+            data:[
+              {value:335, name:'测试', selected:true},
+              {value:679, name:'前端'},
+              {value:1548, name:'后端'}
+            ]
+          },
+          {
+            name:'访问来源',
+            type:'pie',
+            radius: ['40%', '55%'],
+            data:[
+              {value:335, name:'客户沟通'},
+              {value:310, name:'需求整体'},
+              {value:234, name:'需求评审'},
+              {value:135, name:'原型设计'},
+              {value:1048, name:'开发'},
+              {value:251, name:'测试'},
+              {value:147, name:'回归'},
+              {value:102, name:'发布'}
+            ]
+          }
+        ]
+      },
+      // 任务状态
+      taskState: {
+        tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+          orient: 'vertical',
+          left: 'left',
+          data: ['完成']
+        },
+        series: [{
+          name: '客户对接',
+          type: 'pie',
+          radius: ['40%', '50%'],
+          center: ['16.5%', '50%'],
+          color:'#FF8C00',
+          label: {
+            normal: {
+              position: 'center'
+            }
+          },
+          data: [{
+            value: 20,
+            name: '占有率',
+            label: {
+              normal: {
+                formatter: '{d} %',
+                textStyle: {
+                  fontSize: 14
+                }
+              }
+            }
+          }, {
+            value: 80,
+            name: '占位',
+            label: {
+              normal: {
+                formatter: '\n完成率',
+                textStyle: {
+                  color: '#555',
+                  fontSize: 14
+                }
+              }
+            },
+            tooltip: {
+              show: false
+            },
+            itemStyle: {
+              normal: {
+                color: '#aaa'
+              },
+              emphasis: {
+                color: '#aaa'
+              }
+            },
+            hoverAnimation: false
+         }]
+        },{
+          name: '客户对接',
+          type: 'pie',
+          radius: ['40%', '50%'],
+          center: ['50%', '50%'],
+          color:'#FF8C00',
+          label: {
+            normal: {
+              position: 'center'
+            }
+          },
+          data: [{
+            value: 20,
+            name: '占有率',
+            label: {
+              normal: {
+                formatter: '{d} %',
+                textStyle: {
+                  fontSize: 14
+                }
+              }
+            }
+          }, {
+            value: 80,
+            name: '占位',
+            label: {
+              normal: {
+                formatter: '\n完成率',
+                textStyle: {
+                  color: '#555',
+                  fontSize: 14
+                }
+              }
+            },
+            tooltip: {
+              show: false
+            },
+            itemStyle: {
+              normal: {
+                color: '#aaa'
+              },
+              emphasis: {
+                color: '#aaa'
+              }
+            },
+            hoverAnimation: false
+         }]
+        },{
+          name: '客户对接',
+          type: 'pie',
+          radius: ['40%', '50%'],
+          center: ['83.2%', '50%'],
+          color:'#FF8C00',
+          label: {
+            normal: {
+              position: 'center'
+            }
+          },
+          data: [{
+            value: 20,
+            name: '占有率',
+            label: {
+              normal: {
+                formatter: '{d} %',
+                textStyle: {
+                  fontSize: 14
+                }
+              }
+            }
+          }, {
+            value: 80,
+            name: '占位',
+            label: {
+              normal: {
+                formatter: '\n完成率',
+                textStyle: {
+                  color: '#555',
+                  fontSize: 14
+                }
+              }
+            },
+            tooltip: {
+              show: false
+            },
+            itemStyle: {
+              normal: {
+                color: '#aaa'
+              },
+              emphasis: {
+                color: '#aaa'
+              }
+            },
+            hoverAnimation: false
+         }]
+        }]
       }
     }
   },
   methods: {
+    /**
+     * 删除标签
+     * 
+     * @param {String} tag 要删除的标签名称
+     */
     handleClose(tag) {
         this.tags.splice(this.tags.indexOf(tag), 1);
       },
-
+    /**
+     * 新增标签
+     */
     showInput() {
       this.inputVisible = true;
       this.$nextTick(_ => {
         this.$refs.saveTagInput.$refs.input.focus();
       });
     },
-
+    /**
+     * 确定新增标签
+     */
     handleInputConfirm() {
       let inputValue = this.inputValue;
       if (inputValue) {
@@ -151,6 +393,9 @@ export default {
 }
 </script>
 <style>
+.main__dashboard {
+  overflow-x: hidden;
+}
 .main__dashboard .echarts {
   width: 100%;
   height: 100%;
