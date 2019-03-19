@@ -42,19 +42,18 @@ html,body{
 .views__wrapper > .views__content{
   flex: 1;
   overflow: auto;
+  background: #f7f8fa;
+  color: #666;
 }
 .views__wrapper > .views__content > .content__header{
   height: 60px;
+  background: #fff;
 }
 .views__wrapper > .views__content > .content__main{
-  display: flex;
-  flex-direction: column;
   height: calc(100% - 60px);
 }
 .views__wrapper>.views__content>.content__main > div {
-  flex: 1;
+  min-height: 100%;
   padding: 20px;
   box-sizing: border-box;
-  background: #f7f8fa;
-  color: #666;
 }

@@ -12,6 +12,7 @@ import Echarts from 'vue-echarts'
 
 // register components
 Vue.use(ElementUI);
+Vue.prototype.$ELEMENT = {size: 'small'}; // default size
 Vue.component('v-chart', Echarts);
 installComponents(Vue);
 
