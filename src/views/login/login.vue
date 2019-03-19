@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     /**
-     * 登录之后调整到第一个菜单页
+     * 登录之后进入首页
      */
     handleSubmit() {
       this.$message({
