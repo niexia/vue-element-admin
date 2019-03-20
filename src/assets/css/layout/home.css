@@ -52,7 +52,7 @@ html,body{
 .views__wrapper > .views__content > .content__main{
   height: calc(100% - 60px);
 }
-.views__wrapper>.views__content>.content__main > div {
+.views__wrapper > .views__content > .content__main > div {
   min-height: 100%;
   padding: 20px;
   box-sizing: border-box;
