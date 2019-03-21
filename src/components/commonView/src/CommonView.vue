@@ -10,8 +10,8 @@
         <slot name="main">
           <el-table
             :data="tableData3"
-            height="100%"
             border
+            :height="tableHeight"
             style="width: 100%">
             <el-table-column
               prop="date"
@@ -52,9 +52,13 @@ export default {
   mixins: [],
   components: {},
   props: {
-    name: {
+    name: { // view name
       type: String,
       default: ''
+    },
+    isFixedHeader: { // fixed table header
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -172,12 +176,15 @@ export default {
         name: '王小虎',
         address: '上海市普陀区金沙江路 1518 弄'
       }],
-      currentPage4: '',
+      currentPage4: 1
     }
   },
   computed: {
     viewClass() {
-      return ['main__view', this.name && ('main_' + this.name)];
+      return ['main__view', this.name && ('main_' + this.name), this.isFixedHeader && 'is-fixed'];
+    },
+    tableHeight() {
+      return this.isFixedHeader ? '100%' : 'auto';
     }
   },
   watch: {},
@@ -195,14 +202,21 @@ export default {
 }
 </script>
 <style scoped>
-.main__view {
+/* fixed table header */
+.main__view.is-fixed {
   height: 100%;
 }
+.main__view.is-fixed .viewBox {
+  height: 100%;
+  overflow: hidden;
+}
+.main__view.is-fixed .view__main {
+  overflow: hidden;
+}
+/* common */
 .main__view .viewBox {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  overflow: hidden;
   padding: 20px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -213,7 +227,6 @@ export default {
 }
 .main__view .view__main {
   flex: 1;
-  overflow: hidden;
 }
 .main__view .view__footer {
   height: 40px;
