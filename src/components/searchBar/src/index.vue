@@ -1,11 +1,11 @@
 <template>
-  <common-view
-    name="tableBasic">
-  </common-view>
+  <div class="header__searchBar">
+    搜索框
+  </div>
 </template>
 <script>
 export default {
-  name: '',
+  name: 'SearchBar',
   mixins: [],
   components: {},
   props: {},
