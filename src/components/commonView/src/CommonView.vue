@@ -2,71 +2,13 @@
   <div :class="viewClass">
     <div class="viewBox">
       <header class="view__header">
-        <slot name="header">
-          <section class="header__search">
-            <slot name="search">
-              <el-form :inline="true" :model="searchParams" ref="searchForm">
-                <el-form-item label="姓名" prop="param1">
-                  <el-input v-model="searchParams.param1" placeholder="请输入姓名"></el-input>
-                </el-form-item>
-                <el-form-item label="状态" prop="param2">
-                  <el-select v-model="searchParams.param2" placeholder="请选择状态">
-                    <el-option label="成功" value="shanghai"></el-option>
-                    <el-option label="失败" value="beijing"></el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item>
-                  <el-button type="primary" @click="handleSearch">查询</el-button>
-                  <el-button type="primary" @click="handleReset">重置</el-button>
-                </el-form-item>
-              </el-form>
-            </slot>
-          </section>
-          <section class="header__operate">
-            <slot name="operate">
-              <el-button type="primary">新增</el-button>
-              <el-button type="danger">删除</el-button>
-              <el-button>导出</el-button>
-            </slot>
-          </section>
-        </slot>
+        <slot name="header"></slot>
       </header>
       <main class="view__main">
-        <slot name="main">
-          <el-table
-            :data="tableData"
-            :height="tableHeight"
-            border
-            style="width: 100%">
-            <el-table-column
-              prop="date"
-              label="日期"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="name"
-              label="姓名"
-              width="180">
-            </el-table-column>
-            <el-table-column
-              prop="address"
-              label="地址">
-            </el-table-column>
-          </el-table>
-        </slot>
+        <slot name="main" ref="table"></slot>
       </main>
       <footer class="view__footer">
-        <slot name="footer">
-          <el-pagination
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="pageSize"
-            :page-sizes="[100, 200, 300, 400]"
-            :page-size="100"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="400">
-          </el-pagination>
-        </slot>
+        <slot name="footer"></slot>
       </footer>
     </div>
   </div>
@@ -77,76 +19,29 @@ export default {
   mixins: [],
   components: {},
   props: {
-    name: { // view name
+    // The page name
+    name: {
       type: String,
       default: ''
     },
-    isFixedHeader: { // fixed table header
+    // Whether to fixed the table header.
+    // Noting that if the prop height of table is'n 100%,
+    // that is, you don't want to fixed table header,
+    // you shoud banding flase to this prop to make your configuration take affect.
+    isFixed: {
       type: Boolean,
       default: true
-    }
+    },
   },
   data() {
-    return {
-      searchParams: {
-        param1: '',
-        param2: ''
-      },
-      tableData: [{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-08',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-06',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }],
-      pageSize: 1
-    }
+    return {}
   },
   computed: {
     viewClass() {
-      return ['main__view', this.name && ('main_' + this.name), this.isFixedHeader && 'is-fixed'];
-    },
-    tableHeight() {
-      return this.isFixedHeader ? '100%' : 'auto';
+      return ['main__view', this.name && ('main_' + this.name), this.isFixed && 'is-fixed'];
     }
   },
-  watch: {},
-  created () {},
-  mounted() {},
-  destroyed() {},
-  methods: {
-    handleSizeChange(val) {
-      this.$emit('size-change');
-    },
-    handleCurrentChange(val) {
-      this.$emit('current-change');
-    },
-    handleSearch() {
-      this.$emit('search');
-    },
-    handleReset() {
-      this.$refs.searchForm.resetFields();
-      this.$emit('reset');
-    }
-  }
+  methods: {}
 }
 </script>
 <style>
@@ -171,9 +66,6 @@ export default {
   background: #fff;
 }
 .main__view .view__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding-bottom: 20px;
 }
 .main__view .view__header .el-form .el-form-item {
