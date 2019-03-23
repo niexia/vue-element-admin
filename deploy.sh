@@ -8,7 +8,10 @@ npm run build
 cd dist
 
 git add -A
-git commit -m 'deploy'
+git commit -m 'merge dev'
+
+# push
+git push
 
 # 部署到 github
 git push -f https://github.com/yangseas/admin-system.git master:gh-pages
