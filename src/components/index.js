@@ -1,9 +1,7 @@
-import CommonView from './commonView/index';
-import SearchBar from './SearchBar/index';
+import TableQuery from './tableQuery/index';
 
 const components = [
-  CommonView,
-  SearchBar
+  TableQuery,
 ];
 
 const install = function(Vue) {

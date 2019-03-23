@@ -2,36 +2,47 @@
   <div :class="viewClass">
     <div class="viewBox">
       <header class="view__header">
-        <slot name="header"></slot>
+        <slot name="header">
+          <search-bar v-bind="$attrs"></search-bar>
+        </slot>
       </header>
       <main class="view__main">
         <slot name="main" ref="table"></slot>
       </main>
       <footer class="view__footer">
-        <slot name="footer"></slot>
+        <slot name="footer">
+          <pagination v-bind="$attrs"></pagination>
+        </slot>
       </footer>
     </div>
   </div>
 </template>
 <script>
+import Pagination from './pagination.js';
+import SearchBar from './searchBar.js';
 export default {
-  name: 'CommonView',
+  name: 'TableQuery',
+  inheritAttrs: false,
   mixins: [],
-  components: {},
+  components: {
+    Pagination,
+    SearchBar
+  },
   props: {
-    // The page name
     name: {
       type: String,
       default: ''
     },
-    // Whether to fixed the table header.
-    // Noting that if the prop height of table is'n 100%,
-    // that is, you don't want to fixed table header,
-    // you shoud banding flase to this prop to make your configuration take affect.
+    /** 
+     * Whether to fixed the table header.
+     * Noting that if the prop height of table is'n 100%,
+     * that is, you don't want to fixed table header,
+     * you shoud banding flase to this prop to make your configuration take affect.
+    */
     isFixed: {
       type: Boolean,
       default: true
-    },
+    }
   },
   data() {
     return {}
@@ -41,7 +52,8 @@ export default {
       return ['main__view', this.name && ('main_' + this.name), this.isFixed && 'is-fixed'];
     }
   },
-  methods: {}
+  methods: {
+  }
 }
 </script>
 <style>
@@ -66,7 +78,7 @@ export default {
   background: #fff;
 }
 .main__view .view__header {
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 .main__view .view__header .el-form .el-form-item {
   margin-bottom: 0;

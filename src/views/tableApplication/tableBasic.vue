@@ -1,7 +1,8 @@
 <template>
-  <common-view
+  <table-query
     name="tableBasic"
-    :isFixed="true">
+    :isFixed="true"
+    :pagination="pagination">
     <template slot="header">
       <div class="header__search" v-for="(group, index) in searchList" :key="index">
         <div class="search__title">{{group.title}}</div>
@@ -30,18 +31,7 @@
         </el-table-column>
       </el-table>
     </template>
-    <template slot="footer">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="pageSize"
-        :page-sizes="[10, 20, 50, 100]"
-        :page-size="10"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="tableData.length">
-      </el-pagination>
-    </template>
-  </common-view>
+  </table-query>
 </template>
 <script>
 export default {
@@ -76,13 +66,26 @@ export default {
         {type: '类型四', address: '上海', money: '>30K'}, 
         {type: '类型四', address: '广州', money: '20K~30K'}
       ],
-      pageSize: 1
+      // pagination
+      pagination: {
+        attrs: {
+          currentPage: 1,
+          pageSize: 10,
+          total: 100,
+        },
+        events: {
+          'current-change': this.handleCurrentChange,
+          'size-change': this.handleSizeChange
+        }
+      }
     }
   },
   methods: {
-    handleSizeChange(val) {
-    },
     handleCurrentChange(val) {
+      console.log(val);
+    },
+    handleSizeChange(val) {
+      console.log(val);
     }
   }
 }
@@ -91,8 +94,10 @@ export default {
 .main_tableBasic .view__header .header__search {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
   font-size: 14px;
+}
+.main_tableBasic .view__header .header__search + .header__search {
+  margin-top: 10px;
 }
 .header__search .search__title {
   width: 50px;
