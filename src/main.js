@@ -9,10 +9,12 @@ import '@/assets/css/main.css'
 import installComponents from './util/installComponents'
 import installPlugins from './plugins/index'
 import Echarts from 'vue-echarts'
+import components from './components/index';
 
 // register components
 Vue.use(ElementUI);
 Vue.prototype.$ELEMENT = {size: 'small'}; // default size
+Vue.use(components);
 Vue.component('v-chart', Echarts);
 installComponents(Vue);
 
