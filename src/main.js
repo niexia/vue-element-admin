@@ -6,7 +6,6 @@ import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/css/main.css'
-import installComponents from './util/installComponents'
 import installPlugins from './plugins/index'
 import Echarts from 'vue-echarts'
 import components from './components/index';
@@ -16,7 +15,6 @@ Vue.use(ElementUI);
 Vue.prototype.$ELEMENT = {size: 'small'}; // default size
 Vue.use(components);
 Vue.component('v-chart', Echarts);
-installComponents(Vue);
 
 // register plugin
 Vue.use(installPlugins);
