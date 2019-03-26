@@ -76,6 +76,11 @@ export default {
       }]
     }
   },
+  watch: {
+    '$route': function(params) {
+      console.log('router:', params);
+    }
+  },
   methods: {
     
   }

@@ -4,8 +4,8 @@ import AnchorLink from './anchor-link/index';
 
 const components = [
   TableQuery,
-  // Anchor,
-  // AnchorLink
+  Anchor,
+  AnchorLink
 ];
 
 const install = function(Vue) {
