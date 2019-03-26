@@ -28,7 +28,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 2px solid #2d8cf0;
+  border: 1px solid #2d8cf0;
   background-color: #fff;
   left: 50%;
   transition: top 0.2s ease-in-out;
@@ -51,6 +51,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 8px;
+  font-size: 12px;
 }
 .anchor-wrapper .anchor-link .anchor-link-title:only-child {
   margin-bottom: 0;

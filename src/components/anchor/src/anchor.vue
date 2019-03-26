@@ -8,8 +8,8 @@
             :class="`${prefix}-ink-ball`"
             :style="{top: `${inkTop}px`}">
           </span>
-          <slot></slot>
         </div>
+        <slot></slot>
       </div>
     </div>
   </div>
@@ -93,7 +93,6 @@ export default {
 
     // 滚动到指定位置
     handleScrollTo() {
-      debugger;
       const anchor = document.getElementById(this.currentId);
       if (!anchor) return;
       // 目标元素的偏移高度 offsetTop
@@ -124,7 +123,6 @@ export default {
       let offsetArr = [];
       links.forEach(id => {
         const titleEle = document.getElementById(id);
-        // debugger;
         if (titleEle) {
           offsetArr.push({
             link: `#${id}`,
