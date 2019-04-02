@@ -20,6 +20,7 @@ const FromBasic = resolve => require(['@/views/formApplication/formBasic.vue'], 
 const formDetail = resolve => require(['@/views/formApplication/formDetail.vue'], resolve);
 
 // extendComponent
+const Anchor = resolve => require(['@/views/extendComponent/anchor.vue'], resolve);
 const DocViewer = resolve => require(['@/views/extendComponent/docViewer.vue'], resolve);
 const ImageViewer = resolve => require(['@/views/extendComponent/imageViewer.vue'], resolve);
 const Maps = resolve => require(['@/views/extendComponent/map.vue'], resolve);
@@ -96,6 +97,10 @@ export const routesMenu = [{
   name: '扩展组件',
   component: Home,
   children: [{
+    path: 'anchor',
+    name: '锚点',
+    component: Anchor,
+  }, {
     path: 'docViewer',
     name: '文件预览',
     component: DocViewer,

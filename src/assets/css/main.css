@@ -2,5 +2,6 @@
 @import './base/common.css';
 @import './base/reset.css';
 @import './layout/home.css';
-@import './components/search-bar.css';
 @import './../font/iconfont.css';
+@import './components/search-bar.css';
+@import './components//anchor.css';

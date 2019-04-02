@@ -58,15 +58,18 @@ export function scrollTop(el, from = 0, to, duration = 500, callback) {
 
     let d;
     if (start > end) {
-      d = start + step > end ? end : start + step;
+      d = (start - step < end) ? end : start - step;
     } else {
-      d = start - step < end ? end : start - step;
+      d = (start + step > end) ? end : start + step;
     }
 
     if (el === window) {
       window.scrollTo(d, d);
     } else {
-      el.scrollTo(d);
+      console.log('进来了');
+      el.scrollTo({
+        top: d
+      });
     }
     // cyclic
     window.requestAnimationFrame(() => scroll(d, end, step));
