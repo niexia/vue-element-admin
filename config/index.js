@@ -10,7 +10,18 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    // http://localhost:8080/api ===> http://www.test.com/api.
+    // if the path doesn't includes api, the pathRewrite should change to {'^/api': ''}, 
+    // for example, http://localhost:8080/api/login ===> http://www.test.com/login
+    proxyTable: {
+      // '/api': {
+      //   target: 'http://www.test.com',
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': '/api'
+      //   }
+      // }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
