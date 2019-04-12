@@ -141,7 +141,6 @@ export default {
       while (++index < length) {
         let [currentEle, nextEle] = [this.titlesOffsetArr[index], this.titlesOffsetArr[index+1]];
         if (scrollTop >= currentEle.offset && scrollTop < ((nextEle && nextEle.offset) || Infinity)) { // 在某个内容区间
-          console.log('currenEle:', currentEle.link);
           this.currentLink = currentEle.link;
           break;
         }

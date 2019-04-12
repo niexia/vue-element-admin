@@ -6,12 +6,6 @@ function validate() {
     password(str) {
       return /^[a-zA-Z0-9_-]{6,16}$/.test(str);
     },
-    email(str) {
-      return /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(str);
-    },
-    url(str) {
-      return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/.test(str);
-    },
     tel(str) {
       return /^(0\d{2,3}-)?(\d{7,8})$/.test(str);
     },
@@ -38,6 +32,12 @@ function validate() {
     },
     chinese(str) {
       return /^[\u4E00-\u9FA5]+$/.test(str);
+    },
+    email(str) {
+      return /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(str);
+    },
+    url(str) {
+      return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\*\+,;=.]+$/.test(str);
     },
   };
   return {

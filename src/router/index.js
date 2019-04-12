@@ -21,6 +21,7 @@ const formDetail = resolve => require(['@/views/formApplication/formDetail.vue']
 
 // extendComponent
 const Anchor = resolve => require(['@/views/extendComponent/anchor.vue'], resolve);
+const LazyLoad = resolve => require(['@/views/extendComponent/lazyLoad.vue'], resolve);
 const DocViewer = resolve => require(['@/views/extendComponent/docViewer.vue'], resolve);
 const ImageViewer = resolve => require(['@/views/extendComponent/imageViewer.vue'], resolve);
 const Maps = resolve => require(['@/views/extendComponent/map.vue'], resolve);
@@ -100,6 +101,10 @@ export const routesMenu = [{
     path: 'anchor',
     name: '锚点',
     component: Anchor,
+  }, {
+    path: 'lazyLoad',
+    name: '懒加载',
+    component: LazyLoad,
   }, {
     path: 'docViewer',
     name: '文件预览',
