@@ -47,11 +47,22 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
-        }
+        use: [
+          {
+            loader: path.resolve(__dirname, './loader/replace-loader.js'),
+            options: {
+              limit: 10000,
+              name: utils.assetsPath('img/[name].[hash:7].[ext]')
+            }
+          },
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              name: utils.assetsPath('img/[name].[hash:7].[ext]')
+            }
+          }
+        ]
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
