@@ -26,6 +26,7 @@ const DocViewer = resolve => require(['@/views/extendComponent/docViewer.vue'], 
 const ImageViewer = resolve => require(['@/views/extendComponent/imageViewer.vue'], resolve);
 const Maps = resolve => require(['@/views/extendComponent/map.vue'], resolve);
 const MarkdownEditor = resolve => require(['@/views/extendComponent/markdownEditor.vue'], resolve);
+const FlowChart = resolve => require(['@/views/extendComponent/flowChart.vue'], resolve);
 
 // systemSetting
 const PersonalCenter = resolve => require(['@/views/systemSetting/personalCenter.vue'], resolve);
@@ -121,6 +122,10 @@ export const routesMenu = [{
     path: 'markdownEditor',
     name: 'Markdown编辑器',
     component: MarkdownEditor,
+  }, {
+    path: 'flowChart',
+    name: '流程图',
+    component: FlowChart,
   }]
 }, {
   path: '/setting',
