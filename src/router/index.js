@@ -28,6 +28,9 @@ const Maps = resolve => require(['@/views/extendComponent/map.vue'], resolve);
 const MarkdownEditor = resolve => require(['@/views/extendComponent/markdownEditor.vue'], resolve);
 const FlowChart = resolve => require(['@/views/extendComponent/flowChart.vue'], resolve);
 
+// components
+const DatePicker = resolve => require(['@/views/components/datePicker.vue'], resolve);
+
 // systemSetting
 const PersonalCenter = resolve => require(['@/views/systemSetting/personalCenter.vue'], resolve);
 const securitySetting = resolve => require(['@/views/systemSetting/securitySetting.vue'], resolve);
@@ -96,7 +99,7 @@ export const routesMenu = [{
   }]
 }, {
   path: '/extend',
-  name: '扩展组件',
+  name: '扩展应用',
   component: Home,
   children: [{
     path: 'anchor',
@@ -126,6 +129,15 @@ export const routesMenu = [{
     path: 'flowChart',
     name: '流程图',
     component: FlowChart,
+  }]
+}, {
+  path: '/components',
+  name: '组件',
+  component: Home,
+  children: [{
+    path: 'date-picker',
+    name: 'date-picker',
+    component: DatePicker,
   }]
 }, {
   path: '/setting',
