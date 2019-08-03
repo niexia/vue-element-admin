@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "echarts": "^4.1.0",
-    "element-ui": "^2.4.7",
+    "element-ui": "^2.11.1",
     "vue": "^2.5.2",
     "vue-echarts": "^4.0.1",
     "vue-infinite-scroll": "^2.0.2",

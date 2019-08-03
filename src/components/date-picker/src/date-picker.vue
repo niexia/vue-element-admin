@@ -1,7 +1,8 @@
 <template>
   <div class="nx-date-picker" v-click-outside>
-    <input type="text" :value="formatDate">
+    <input class="nx-input" type="text" :value="formatDate">
     <div class="pannel" v-show="isVisible">
+      <div class="pannel-arrow" style="left: 35px;"></div>
       <div class="pannel-nav">
         <span @click="preYear">&lt;&lt;</span>
         <span @click="preMonth">&lt;</span>
@@ -26,20 +27,20 @@
               today: isToday(visibleDays[(i - 1) * 7 + (j - 1)]),
               select: isSelect(visibleDays[(i - 1) * 7 + (j - 1)])
             }"
-            @click="chooseDate(visibleDays[(i - 1) * 7 + (j - 1)])">
+            @click.stop="chooseDate(visibleDays[(i - 1) * 7 + (j - 1)])">
             {{ visibleDays[(i - 1) * 7 + (j - 1)].getDate() }}
           </span>
         </div>
       </div>
-      <div class="pannel-footer">
-        今天
-      </div>
+      <div class="pannel-footer" @click.stop="chooseToday">今天</div>
     </div>
   </div>
 </template>
 
 <script>
 import * as utils from './utils'
+const ONE_DAY_MS = 60 * 60 * 1000 * 24;
+
 export default {
   name: 'NxDatePicker',
   props: {
@@ -65,7 +66,7 @@ export default {
         el.handler = handler;
         document.addEventListener('click', handler)
       },
-      unbind() {
+      unbind(el) {
         document.removeEventListener('click', el.handler)
       }
     }
@@ -86,17 +87,21 @@ export default {
       // 当前月第一天是周几
       let week = currentFirstDay.getDay()
       // 当前月日历开始的第一天
-      let oneDayTime = 60 * 60 * 1000 * 24
-      let startDay = currentFirstDay - week * oneDayTime
+      let startDay = currentFirstDay - week * ONE_DAY_MS
       let days = [];
       for (let i = 0; i < 42; i++) {
-        days.push(new Date(startDay + i * oneDayTime));
+        days.push(new Date(startDay + i * ONE_DAY_MS));
       }
       return days;
     },
     formatDate() {
       let {year, month, day} = utils.getYearMonthDay(this.value);
-      return `${year}-${month}-${day}`;
+      return `${year}-${month + 1}-${day}`;
+    }
+  },
+  watch: {
+    value(val) {
+      this.time = utils.getYearMonthDay(val)
     }
   },
   methods: {
@@ -121,13 +126,18 @@ export default {
       this.$emit('input', date)
       this.blur()
     },
+    chooseToday() {
+      let today = new Date()
+      this.time = utils.getYearMonthDay(today)
+      this.$emit('input', today)
+      this.blur()
+    },
     isSelect(date) {
       let {year, month, day} = utils.getYearMonthDay(this.value)
       let {year: y, month: m, day: d} = utils.getYearMonthDay(date)
       return year === y && month === m && day === d
     },
     preMonth() {
-      // 获取当前月的一个日期
       let d = utils.getDate(this.time.year, this.time.month, 1)
       d.setMonth(d.getMonth() - 1)
       this.time = utils.getYearMonthDay(d)
@@ -157,10 +167,33 @@ export default {
   .pannel {
     width: 224px;
     position: absolute;
-    top: 31px;
+    top: 42px;
     font-size: 12px;
     background: #fff;
-    box-shadow: 2px 2px 2px pink, -2px -2px 2px pink;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px 0 pink;
+    .pannel-arrow {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      margin-right: 3px;
+      border-top-width: 0;
+      border-bottom-color: #ebeef5;
+      &::after {
+        position: absolute;
+        display: block;
+        content: " ";
+        width: 0;
+        height: 0;
+        border-width: 6px;
+        border-color: transparent;
+        border-style: solid;
+        top: 1px;
+        margin-left: -6px;
+        border-top-width: 0;
+        border-bottom-color: #fff;
+      }
+    }
     .pannel-nav {
       display: flex;
       justify-content: space-around;
@@ -188,6 +221,9 @@ export default {
           background: red;
           border-radius: 4px;
         }
+        &.is-day {
+          cursor: pointer;
+        }
         &.is-day:hover,
         &.select {
           box-sizing: border-box;
@@ -200,7 +236,25 @@ export default {
       height: 30px;
       line-height: 30px;
       text-align: center;
+      cursor: pointer;
     }
-  } 
+  }
+  .nx-input {
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 15px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 260px;
+  }
 }
 </style>
