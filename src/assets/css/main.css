@@ -4,4 +4,5 @@
 @import './layout/home.css';
 @import './../font/iconfont.css';
 @import './components/search-bar.css';
-@import './components//anchor.css';
+@import './components/anchor.css';
+@import './vendors/github-markdown-css.css';

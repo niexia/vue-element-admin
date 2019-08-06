@@ -5,20 +5,20 @@
       <el-form :model="form" :rules="rules" ref="form" label-width="100px">
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="用户名" prop="name">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="用户名" prop="userName">
+              <el-input v-model="form.userName"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="密码" prop="name">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="密码" prop="possword">
+              <el-input v-model="form.possword"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="数字" prop="name">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="数字" prop="number">
+              <el-input v-model="form.number"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -29,56 +29,32 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="数字" prop="name">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="手机" prop="phone">
+              <el-input v-model="form.phone"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="中文" prop="name">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item label="用户名" prop="name">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="密码" prop="name">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="电话" prop="tel">
+              <el-input v-model="form.tel"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="手机" prop="name">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="邮箱" prop="email">
+              <el-input v-model="form.email"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="电话" prop="name">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item label="邮箱" prop="name">
-              <el-input v-model="form.name"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="网址" prop="name">
-              <el-input v-model="form.name"></el-input>
+            <el-form-item label="网址" prop="url">
+              <el-input v-model="form.url"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="单选" prop="region">
-              <el-select v-model="form.region" placeholder="请选择">
+            <el-form-item label="单选" prop="radio">
+              <el-select v-model="form.radio" placeholder="请选择">
                 <el-option label="选项一" value="shanghai"></el-option>
                 <el-option label="选项二" value="beijing"></el-option>
               </el-select>
@@ -95,20 +71,20 @@
         </el-row>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="时间" prop="date1">
-              <el-time-picker type="date" placeholder="选择时间" v-model="form.date1" style="width: 100%;"></el-time-picker>
+            <el-form-item label="时间" prop="time">
+              <el-time-picker type="date" placeholder="选择时间" v-model="form.time" style="width: 100%;"></el-time-picker>
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="日期" prop="date1">
-              <el-date-picker type="date" placeholder="选择时间" v-model="form.date1" style="width: 100%;"></el-date-picker>
+            <el-form-item label="日期" prop="date">
+              <el-date-picker type="date" placeholder="选择时间" v-model="form.date" style="width: 100%;"></el-date-picker>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="12">
-            <el-form-item label="多选" prop="type">
-              <el-checkbox-group v-model="form.type">
+            <el-form-item label="多选" prop="checkbox">
+              <el-checkbox-group v-model="form.checkbox">
                 <el-checkbox label="深圳" name="type"></el-checkbox>
                 <el-checkbox label="广州" name="type"></el-checkbox>
                 <el-checkbox label="上海" name="type"></el-checkbox>
@@ -117,16 +93,16 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="单选" prop="resource">
-              <el-radio-group v-model="form.resource">
+            <el-form-item label="单选" prop="gender">
+              <el-radio-group v-model="form.gender">
                 <el-radio label="男"></el-radio>
                 <el-radio label="女"></el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="评分" prop="delivery">
-          <el-rate v-model="form.delivery" show-text>
+        <el-form-item label="评分" prop="star">
+          <el-rate v-model="form.star" show-text>
           </el-rate>
         </el-form-item>
         <el-form-item label="描述" prop="desc">
@@ -141,52 +117,159 @@
   </div>
 </template>
 <script>
+import validate from 'utils/validate.js';
 export default {
-  name: '',
-  mixins: [],
-  components: {},
-  props: {},
+  name: 'formBasic',
   data() {
     return {
       form: {
+        userName: '',
+        password: '',
+        number: '',
         name: '',
-        region: '',
+        phone: '',
+        tel: '',
+        email: '',
+        url: '',
+        radio: '',
         multiple: '',
-        date1: '',
-        date2: '',
-        delivery: 4,
-        type: [],
-        resource: '',
+        time: '',
+        date: '',
+        checkbox: [],
+        gender: '',
+        star: 4,
         desc: ''
       },
       rules: {
-        name: [
-          { required: true, message: '请输入活动名称', trigger: 'blur' },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        region: [
-          { required: true, message: '请选择活动区域', trigger: 'change' }
-        ],
-        date1: [
-          { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-        ],
-        date2: [
-          { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-        ],
-        type: [
-          { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-        ],
-        resource: [
-          { required: true, message: '请选择活动资源', trigger: 'change' }
-        ],
-        desc: [
-          { required: true, message: '请填写活动形式', trigger: 'blur' }
-        ]
+        userName: [{
+          required: true,
+          validator: (rule, val, cb) => {
+            if (validate.valid('username', val)) {
+              cb();
+            } else {
+              cb(new Error('请输入1到16位的用户名, 用户名可以包含数字、字母、_和-'));
+            }
+          },
+          trigger: 'blur'
+        }],
+        possword: [{
+          required: true,
+          validator: (rule, val, cb) => {
+            if (validate.valid('possword', val)) {
+              cb();
+            } else {
+              cb(new Error('请输入6到16位的密码, 密码可以包含数字、字母、_和-'));
+            }
+          },
+          trigger: 'blur'
+        }],
+        number: [{
+          required: true,
+          validator: (rule, val, cb) => {
+            if (validate.valid('number', val)) {
+              cb();
+            } else {
+              cb(new Error('请输入数字'));
+            }
+          },
+          trigger: 'blur'
+        }],
+        name: [{
+          required: true,
+          validator: (rule, val, cb) => {
+            if (validate.valid('chinese', val)) {
+              cb();
+            } else {
+              cb(new Error('请输入中文'));
+            }
+          },
+          trigger: 'blur'
+        }],
+        phone: [{
+          required: true,
+          validator: (rule, val, cb) => {
+            if (validate.valid('phone', val)) {
+              cb();
+            } else {
+              cb(new Error('请输入正确的手机号码'));
+            }
+          },
+          trigger: 'blur'
+        }],
+        tel: [{
+          required: true,
+          validator: (rule, val, cb) => {
+            if (validate.valid('tel', val)) {
+              cb();
+            } else {
+              cb(new Error('请输入正确的电话号码'));
+            }
+          },
+          trigger: 'blur'
+        }],
+        email: [{
+          required: true,
+          validator: (rule, val, cb) => {
+            if (validate.valid('email', val)) {
+              cb();
+            } else {
+              cb(new Error('请输入正确的邮箱地址'));
+            }
+          },
+          trigger: 'blur'
+        }],
+        url: [{
+          required: true,
+          validator: (rule, val, cb) => {
+            if (validate.valid('url', val)) {
+              cb();
+            } else {
+              cb(new Error('请输入正确的网址'));
+            }
+          },
+          trigger: 'blur'
+        }],
+        radio: [{ 
+          required: true,
+          message: '请选择',
+          trigger: 'change'
+        }],
+        multiple: [{ 
+          required: true,
+          message: '请选择',
+          trigger: 'change'
+        }],
+        time: [{
+          type: 'date',
+          required: true,
+          message: '请选择时间',
+          trigger: 'change'
+        }],
+        date: [{
+          type: 'date',
+          required: true,
+          message: '请选择日期',
+          trigger: 'change'
+        }],
+        checkbox: [{
+          type: 'array',
+          required: true,
+          message: '请至少选择一个',
+          trigger: 'change'
+        }],
+        gender: [{
+          required: true,
+          message: '请选择性别',
+          trigger: 'change'
+        }],
+        desc: [{
+          required: true,
+          message: '请填写说明',
+          trigger: 'blur'
+        }]
       }
     };
   },
-  computed: {},
-  watch: {},
   methods: {
     // 提交
     submitForm(formName) {

@@ -66,7 +66,6 @@ export function scrollTop(el, from = 0, to, duration = 500, callback) {
     if (el === window) {
       window.scrollTo(d, d);
     } else {
-      console.log('进来了');
       el.scrollTo({
         top: d
       });

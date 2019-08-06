@@ -48,9 +48,9 @@ export default {
   background: #fff;
 }
 .main__anchor aside > div {
-  position: fixed;
+  /* position: fixed;
   top: 0;
-  left: 0;
+  left: 0; */
 }
 </style>
 

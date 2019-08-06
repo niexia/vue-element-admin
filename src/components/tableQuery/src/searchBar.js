@@ -39,7 +39,7 @@ export default {
       return (
         this._l(fieldList, field => {
           const _fieldRegion = field.region || 'main';
-          if (_fieldRegion === _region && field.type === 'br') return <br />;
+          if (_fieldRegion === _region && field.type === 'br') return <br/>;
           return _fieldRegion === _region && (
             <div
               class={[

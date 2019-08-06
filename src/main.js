@@ -4,14 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
+import infiniteScroll from 'vue-infinite-scroll'
+import Echarts from 'vue-echarts'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/css/main.css'
 import installPlugins from './plugins/index'
-import Echarts from 'vue-echarts'
 import components from './components/index';
 
 // register components
 Vue.use(ElementUI);
+Vue.use(infiniteScroll);
 Vue.prototype.$ELEMENT = {size: 'small'}; // default size
 Vue.use(components);
 Vue.component('v-chart', Echarts);

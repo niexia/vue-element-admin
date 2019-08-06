@@ -31,6 +31,7 @@ module.exports = {
       'components': resolve('src/components'),
       'utils': resolve('src/utils'),
       'views': resolve('src/views'),
+      'static': resolve('static')
     }
   },
   module: {

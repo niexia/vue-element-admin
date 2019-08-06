@@ -21,10 +21,16 @@ const formDetail = resolve => require(['@/views/formApplication/formDetail.vue']
 
 // extendComponent
 const Anchor = resolve => require(['@/views/extendComponent/anchor.vue'], resolve);
+const LazyLoad = resolve => require(['@/views/extendComponent/lazyLoad.vue'], resolve);
 const DocViewer = resolve => require(['@/views/extendComponent/docViewer.vue'], resolve);
 const ImageViewer = resolve => require(['@/views/extendComponent/imageViewer.vue'], resolve);
 const Maps = resolve => require(['@/views/extendComponent/map.vue'], resolve);
 const MarkdownEditor = resolve => require(['@/views/extendComponent/markdownEditor.vue'], resolve);
+const FlowChart = resolve => require(['@/views/extendComponent/flowChart.vue'], resolve);
+
+// components
+const DatePicker = resolve => require(['@/views/components/datePicker.vue'], resolve);
+const Calendar = resolve => require(['@/views/components/calendar.vue'], resolve);
 
 // systemSetting
 const PersonalCenter = resolve => require(['@/views/systemSetting/personalCenter.vue'], resolve);
@@ -94,12 +100,16 @@ export const routesMenu = [{
   }]
 }, {
   path: '/extend',
-  name: '扩展组件',
+  name: '扩展应用',
   component: Home,
   children: [{
     path: 'anchor',
     name: '锚点',
     component: Anchor,
+  }, {
+    path: 'lazyLoad',
+    name: '懒加载',
+    component: LazyLoad,
   }, {
     path: 'docViewer',
     name: '文件预览',
@@ -116,6 +126,23 @@ export const routesMenu = [{
     path: 'markdownEditor',
     name: 'Markdown编辑器',
     component: MarkdownEditor,
+  }, {
+    path: 'flowChart',
+    name: '流程图',
+    component: FlowChart,
+  }]
+}, {
+  path: '/components',
+  name: '组件',
+  component: Home,
+  children: [{
+    path: 'date-picker',
+    name: 'date-picker',
+    component: DatePicker,
+  }, {
+    path: 'calendar',
+    name: 'calendar',
+    component: Calendar,
   }]
 }, {
   path: '/setting',
