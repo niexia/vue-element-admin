@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>日历组件</p>
+    <p>datePicker 时间选择</p>
     <el-divider></el-divider>
     <nx-date-picker v-model="now"></nx-date-picker>
     <div class="mt-10">

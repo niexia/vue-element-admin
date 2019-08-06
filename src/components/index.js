@@ -3,13 +3,17 @@ import Anchor from './anchor/index';
 import AnchorLink from './anchor-link/index';
 import NxTransfer from './transfer/index';
 import NxDatePicker from './date-picker/index';
+import NxCalendar from './calendar/index';
+import NxMonthPicker from './month-picker/index';
 
 const components = [
   TableQuery,
   Anchor,
   AnchorLink,
   NxTransfer,
-  NxDatePicker
+  NxDatePicker,
+  NxCalendar,
+  NxMonthPicker
 ];
 
 const install = function(Vue) {
