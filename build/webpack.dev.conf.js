@@ -9,6 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const DllReferencePlugin = require('webpack/lib/DllReferencePlugin')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -45,6 +47,19 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     }
   },
   plugins: [
+    new DllReferencePlugin({
+      context: __dirname,
+      // manifest就是我们第一步中打包出来的json文件
+      manifest: require('./dist/vendor.manifest.json'),
+    }),
+    new AddAssetHtmlPlugin({ 
+      filepath: require.resolve('./dist/vendor.dll.js'),
+      // 文件输出目录
+      outputPath: 'vendor',
+      // 脚本或链接标记的公共路径
+      publicPath: config.dev.assetsPublicPath + 'vendor',
+      includeSourcemap: false
+    }),
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
     }),
