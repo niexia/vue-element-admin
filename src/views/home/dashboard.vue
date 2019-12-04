@@ -5,8 +5,7 @@
         <div class="personal__info">
           <img src="../../assets/imgs/icon__logo.jpg">
           <div>
-            <span class="info__name">Yang</span><br>
-            <span class="info__detail">部门: 技术部</span><br>
+            <span class="info__name">niexias</span><br>
             <span class="info__detail">个人签名: Seas the world</span>
           </div>
         </div>

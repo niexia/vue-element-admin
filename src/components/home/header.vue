@@ -9,11 +9,8 @@
     </div>
     <el-dropdown class="header__user">
       <div class="user__profile">
-        <img src="./../../assets/imgs/icon__logo.jpg">
-        <p>
-          <span style="font-size: 13px;">Yang</span><br>
-          <span style="font-size: 12px;">技术部</span>
-        </p>
+        <img class="icon" src="./../../assets/imgs/icon__logo.jpg">
+        <p>niexias</p>
       </div>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>
@@ -78,8 +75,9 @@ export default {
   text-align: center;
   color: #333;
 }
-.content__header .header__user .user__profile img {
+.content__header .header__user .user__profile .icon {
   display: inline-block;
+  border-radius: 50%;
   height: 40px;
   width: 40px;
   margin-right: 10px;
