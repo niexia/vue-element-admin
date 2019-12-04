@@ -1,8 +1,10 @@
 <template>
   <div>
+    <p>calendar 日历组件</p>
+    <el-divider></el-divider>
     <el-button @click="handleAddData">添加数据</el-button>
     <el-button @click="handleDeleteData">删除数据</el-button>
-    <div style="margin: 20px;">
+    <div class="mt-10">
       <nx-transfer filterable v-model="value" :data="data"></nx-transfer>
     </div>
   </div>

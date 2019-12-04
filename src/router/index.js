@@ -31,6 +31,7 @@ const FlowChart = resolve => require(['@/views/extendComponent/flowChart.vue'], 
 // components
 const DatePicker = resolve => require(['@/views/components/datePicker.vue'], resolve);
 const Calendar = resolve => require(['@/views/components/calendar.vue'], resolve);
+const Transfer = resolve => require(['@/views/components/transfer.vue'], resolve);
 
 // systemSetting
 const PersonalCenter = resolve => require(['@/views/systemSetting/personalCenter.vue'], resolve);
@@ -143,6 +144,10 @@ export const routesMenu = [{
     path: 'calendar',
     name: 'calendar',
     component: Calendar,
+  }, {
+    path: 'transfer',
+    name: 'transfer',
+    component: Transfer,
   }]
 }, {
   path: '/setting',
