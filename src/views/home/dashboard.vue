@@ -5,8 +5,7 @@
         <div class="personal__info">
           <img src="../../assets/imgs/icon__logo.jpg">
           <div>
-            <span class="info__name">Yang</span><br>
-            <span class="info__detail">部门: 技术部</span><br>
+            <span class="info__name">niexias</span><br>
             <span class="info__detail">个人签名: Seas the world</span>
           </div>
         </div>
@@ -392,89 +391,92 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
 .main__dashboard {
   overflow-x: hidden;
-}
-.main__dashboard .echarts {
-  width: 100%;
-  height: 100%;
-}
-.main__dashboard .row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.main__dashboard .row:nth-child(1) {
-  height: 200px;
-}
-.main__dashboard .row:nth-child(2) {
-  height: 300px;
-}
-.main__dashboard .row:nth-child(3) {
-  height: 300px;
-  margin-bottom: 0;
-}
-.main__dashboard .row .col {
-  width: 50%;
-  height: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  background-color: #fff;
-  border-radius: 8px;
-}
-.main__dashboard .row .col:last-child {
-  flex: 1;
-}
-.main__dashboard .row-1 .col-1 {
-  width: 70%;
-  display: flex;
-  align-items: center;
-}
-.main__dashboard .personal__info {
-  width: 50%;
-  display: flex;
-  align-items: center;
-  line-height: 22px;
-}
-.main__dashboard .personal__info img {
-  width: 80px;
-  height: 80px;
-  margin-right: 10px;;
-}
-.main__dashboard .personal__info .info__name {
-  font-size: 20px;
-  color: #303133;
-}
-.main__dashboard .personal__info .info__detail {
-  font-size: 12px;
-  color: #909399;
-}
-.main__dashboard .personal__tags {
-  width: 50%;
-  overflow-y: auto;
-}
-.main__dashboard .personal__tags .el-tag {
-    margin: 0 10px 10px 0;
+  .echarts {
+    width: 100%;
+    height: 100%;
   }
-.main__dashboard .personal__tags .button-new-tag {
-  height: 32px;
-  line-height: 30px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.main__dashboard .personal__tags .input-new-tag {
-  width: 90px;
-}
-.personal__todo .todo__info {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 20px 0px 20px;
-  border-bottom: 1px solid #F2F6FC;
-}
-.personal__todo .todo__button {
-  margin-top: 20px;
-  width: 100%;
+  .row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    &:nth-child(1) {
+      height: 200px;
+    }
+    &:nth-child(2) {
+      height: 300px;
+    }
+    &:nth-child(3) {
+      height: 300px;
+      margin-bottom: 0;
+    }
+    .col {
+      width: 50%;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      background-color: #fff;
+      border-radius: 8px;
+    }
+    .col:last-child {
+      flex: 1;
+    }
+    &.row-1 .col-1 {
+      width: 70%;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .personal__info {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    line-height: 22px;
+    img {
+      width: 80px;
+      height: 80px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+    .info__name {
+      font-size: 20px;
+      color: #303133;
+    }
+    .info__detail {
+      font-size: 12px;
+      color: #909399;
+    }
+  }
+  .personal__tags {
+    width: 50%;
+    overflow-y: auto;
+    .el-tag {
+      margin: 0 10px 10px 0;
+    }
+    .button-new-tag {
+      height: 32px;
+      line-height: 30px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .input-new-tag {
+      width: 90px;
+    }
+  }
+  .personal__todo {
+    .todo__info {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 20px 0px 20px;
+      border-bottom: 1px solid #F2F6FC;
+    }
+    .todo__button {
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
 }
 </style>

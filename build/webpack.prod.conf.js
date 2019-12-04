@@ -10,6 +10,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
+const DllReferencePlugin = require('webpack/lib/DllReferencePlugin')
 
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -30,6 +32,19 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
+    new DllReferencePlugin({
+      context: __dirname,
+      // manifest就是我们第一步中打包出来的json文件
+      manifest: require('./dist/vendor.manifest.json'),
+    }),
+    new AddAssetHtmlPlugin({ 
+      filepath: require.resolve('./dist/vendor.dll.js'),
+      // 文件输出目录
+      outputPath: 'vendor',
+      // 脚本或链接标记的公共路径
+      publicPath: config.build.assetsPublicPath + 'vendor',
+      includeSourcemap: false
+    }),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
@@ -122,7 +137,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       {
         from: path.resolve(__dirname, '../favicon.ico'),
         to: config.build.assetsRoot,
-      },
+      }
     ])
   ]
 })

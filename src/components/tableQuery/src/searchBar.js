@@ -14,7 +14,8 @@ export default {
   },
   data() {
     return {
-      isExpand: false
+      isExpand: false,
+      initFieldList: []
     };
   },
   computed: {
@@ -22,22 +23,45 @@ export default {
       return this.fieldList.some(item => item.region && item.region === 'option');
     }
   },
+  mounted() {
+    this._saveInitFieldList();
+  },
   methods: {
     handleExpandClick() {
       this.isExpand = !this.isExpand;
     },
     handleSearchClick() {
-      console.log('搜索');
+      let queries = this._getQueries();
+      this.$emit('search', queries);
     },
     handleResetClick() {
-      console.log('重置');
+      this.initFieldList.forEach((item, index) => {
+        if (this.fieldList[index].hasOwnProperty('key')) {
+          this.fieldList[index].value = item.value;
+        }
+      });
+      let queries = this._getQueries();
+      this.$emit('reset', queries);
+    },
+    _saveInitFieldList() {
+      this.initFieldList = this.fieldList.map(({ value }) => ({ value }))
+    },
+    _getQueries() {
+      let queries = {};
+      // 如果设置了 key，并且值有效，则作为查询条件
+      this.fieldList.forEach(({key, value}) => {
+        if (key && value != null && value !== '') {
+          queries[key] = value;
+        }
+      });
+      return queries;
     }
   },
   render(h) {
     const { fieldList, isExpand } = this;
     const genField = (_fileList, _region) => {
       return (
-        this._l(fieldList, field => {
+        this._l(_fileList, field => {
           const _fieldRegion = field.region || 'main';
           if (_fieldRegion === _region && field.type === 'br') return <br/>;
           return _fieldRegion === _region && (

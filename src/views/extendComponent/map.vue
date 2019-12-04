@@ -1,7 +1,5 @@
 <template>
-  <div>
-
-  </div>
+  <nx-code></nx-code>
 </template>
 <script>
 export default {

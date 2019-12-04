@@ -33,20 +33,20 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
 .views__slideBar {
   overflow: auto;
   box-shadow: 0 2px 4px rgba(0,21,41,.08);
-}
-.views__slideBar .el-menu {
-  border-right: none;
-}
-.views__slideBar .el-menu .slideBar__expand {
-  color: #656C75;
-}
-.views__slideBar .el-menu .el-submenu__title [class^='icon-']{
-  margin:0 8px 0 3px;
-  font-size: 18px;
-  color: #656C75;
+  .el-menu {
+    border-right: none;
+    .slideBar__expand {
+      color: #656C75;
+    }
+    .el-submenu__title [class^='icon-']{
+      margin:0 8px 0 3px;
+      font-size: 18px;
+      color: #656C75;
+    }
+  }
 }
 </style>

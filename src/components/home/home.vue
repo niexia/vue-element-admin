@@ -22,11 +22,11 @@ export default{
   }
 }
 </script>
-<style>
-.views__wrapper{
+<style lang="scss">
+.views__wrapper {
   display: flex;
-}
-.views__wrapper .views__content{
-  flex: 1;
+  .views__content {
+    flex: 1;
+  }
 }
 </style>

@@ -24,10 +24,11 @@ export default {
     const {attrs, events} = this.pagination;
     const Props = getProps(attrs, events);
     return (
-    <ElPagination
-      layout={attrs.layout || 'total, sizes, prev, pager, next, jumper'}
-      pageSizes={attrs.pageSizes || [10, 20, 30, 40, 100]}
-      {...Props}>
-    </ElPagination>)
+      <ElPagination
+        layout={attrs.layout || 'total, sizes, prev, pager, next, jumper'}
+        pageSizes={attrs.pageSizes || [10, 20, 30, 40, 100]}
+        {...Props}>
+      </ElPagination>
+    )
   }
 }

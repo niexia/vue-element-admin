@@ -86,31 +86,31 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
 .main__formDetail .cardBox .card__item {
   height: 400px;
   margin-bottom: 20px;
   background: #fff;
   border-radius: 8px;
-}
-.main__formDetail .cardBox .card__item .img {
-  width: 100%;
-  height: 260px;
-  background-position: center center;
-  background-size: cover;
-}
-.main__formDetail .cardBox .card__item h1 {
-  line-height: 24px;
-  padding: 20px 10px 0;
-  font-size: 18px;
-  color: #606266;
-}
-.main__formDetail .cardBox .card__item p {
-  line-height: 22px;
-  padding: 5px 10px 20px;
-  font-size: 14px;
-  color: #606266;
-  opacity: 0.6;
+  .img {
+    width: 100%;
+    height: 260px;
+    background-position: center center;
+    background-size: cover;
+  }
+  h1 {
+    line-height: 24px;
+    padding: 20px 10px 0;
+    font-size: 18px;
+    color: #606266;
+  }
+  p {
+    line-height: 22px;
+    padding: 5px 10px 20px;
+    font-size: 14px;
+    color: #606266;
+    opacity: 0.6;
+  }
 }
 </style>
 

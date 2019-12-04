@@ -117,15 +117,17 @@ export default {
   }
 }
 </script>
-<style>
-.main__lazyLoad img {
-  float: left;
-  width: 24.25%;
-  height: 200px;
-  margin-right: 1%;
-  margin-bottom: 20px;
-}
-.main__lazyLoad img:nth-child(4n) {
-  margin-right: 0;
+<style lang="scss">
+.main__lazyLoad {
+  img {
+    float: left;
+    width: 24.25%;
+    height: 200px;
+    margin-right: 1%;
+    margin-bottom: 20px;
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+  }
 }
 </style>

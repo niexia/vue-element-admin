@@ -5,6 +5,7 @@ import NxTransfer from './transfer/index';
 import NxDatePicker from './date-picker/index';
 import NxCalendar from './calendar/index';
 import NxMonthPicker from './month-picker/index';
+import Code from './code/index';
 
 const components = [
   TableQuery,
@@ -13,7 +14,8 @@ const components = [
   NxTransfer,
   NxDatePicker,
   NxCalendar,
-  NxMonthPicker
+  NxMonthPicker,
+  Code
 ];
 
 const install = function(Vue) {
