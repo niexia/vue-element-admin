@@ -3,7 +3,9 @@
     name="tableSearch"
     :field-list="fieldList"
     :pagination="pagination"
-    :isFixed="true">
+    :isFixed="true"
+    @search="handleSearch"
+    @reset="handleReset">
     <template slot="header">
     </template>
     <template slot="main">
@@ -50,54 +52,60 @@ export default {
       fieldList: [
         // button
         {
-          key: 'x-button-0',
           type:'y-button',
           align: 'right',
           text: '导出',
           region:'main',
           attrs: {
             icon: 'el-icon-upload'
+          },
+          events: {
+            click: this.handleClick
           }
         },
         {
-          key: 'x-button-1',
           type:'y-button',
           align: 'right',
           text: '删除',
           region:'main',
           attrs: {
             type: 'danger',
+          },
+          events: {
+            click: this.handleClick
           }
         },
         {
-          key: 'x-button-2',
           type:'y-button',
           align: 'right',
           text: '新增',
           region:'main',
           attrs: {
             type: 'primary',
+          },
+          events: {
+            click: this.handleClick
           }
         },
-        // main
+        // main-form
         {
-          key: 'input-1',
           type: 'y-input',
           region: 'main',
-          value: '1',
-          attrs: {},
+          key: 'query1',
+          value: '',
+          attrs: {
+            placeholder: '请输入',
+          },
           events: {
-            blur: this.onBlur,
-            change: this.onChange,
-            clear: this.onClear,
-            input: val => console.log(val)
+            change: this.handleChange,
+            clear: this.handleClear
           }
         },
         {
-          key: 'time-picker-0',
           type:'y-time-picker',
           region:'main',
-          value: new Date(2016, 9, 10, 18, 40),
+          key: 'query2',
+          value: '',
           attrs:{
             clearable: true,
             placeholder: '任意时间点',
@@ -108,16 +116,15 @@ export default {
             }
           },
           events: {
-            blur: this.onBlur,
-            change: this.onChange
+            change: this.handleChange
           }
         },
-        // option
+        // option-form
         {
-          key: 'time-select-0',
           type:'y-time-select',
           region: 'option',
-          value: this.startTime,
+          key: 'query3',
+          value: '',
           attrs:{
             clearable: true,
             placeholder: '选择时间',
@@ -129,15 +136,14 @@ export default {
             }
           },
           events: {
-            blur: this.onBlur,
-            change: this.onChange
+            change: this.handleChange
           }
         },
         {
-          key: 'time-select-0',
           type:'y-time-select',
           region: 'option',
-          value: this.startTime,
+          key: 'query4',
+          value: '',
           attrs:{
             clearable: true,
             placeholder: '选择时间',
@@ -149,15 +155,14 @@ export default {
             }
           },
           events: {
-            blur: this.onBlur,
-            change: this.onChange
+            change: this.handleChange
           }
         },
         {
-          key: 'time-select-0',
           type:'y-time-select',
           region: 'option',
-          value: this.startTime,
+          key: 'query5',
+          value: '',
           attrs:{
             clearable: true,
             placeholder: '选择时间',
@@ -169,15 +174,14 @@ export default {
             }
           },
           events: {
-            blur: this.onBlur,
-            change: this.onChange
+            change: this.handleChange
           }
         },
         {
-          key: 'time-select-0',
           type:'y-time-select',
           region: 'option',
-          value: this.startTime,
+          key: 'query6',
+          value: '',
           attrs:{
             clearable: true,
             placeholder: '选择时间',
@@ -189,15 +193,14 @@ export default {
             }
           },
           events: {
-            blur: this.onBlur,
-            change: this.onChange
+            change: this.handleChange
           }
         },
         {
-          key: 'time-select-0',
           type:'y-time-select',
           region: 'option',
-          value: this.startTime,
+          key: 'query7',
+          value: '',
           attrs:{
             clearable: true,
             placeholder: '选择时间',
@@ -209,15 +212,14 @@ export default {
             }
           },
           events: {
-            blur: this.onBlur,
-            change: this.onChange
+            change: this.handleChange
           }
         },
         {
-          key: 'time-select-0',
           type:'y-time-select',
           region: 'option',
-          value: this.startTime,
+          key: 'query8',
+          value: '',
           attrs:{
             clearable: true,
             placeholder: '选择时间',
@@ -229,15 +231,14 @@ export default {
             }
           },
           events: {
-            blur: this.onBlur,
-            change: this.onChange
+            change: this.handleChange
           }
         },
         {
-          key: 'time-select-0',
           type:'y-time-select',
           region: 'option',
-          value: this.startTime,
+          key: 'query9',
+          value: '',
           attrs:{
             clearable: true,
             placeholder: '选择时间',
@@ -249,15 +250,14 @@ export default {
             }
           },
           events: {
-            blur: this.onBlur,
-            change: this.onChange
+            change: this.handleChange
           }
         },
         {
-          key: 'time-select-0',
           type:'y-time-select',
           region: 'option',
-          value: this.startTime,
+          key: 'query10',
+          value: '',
           attrs:{
             clearable: true,
             placeholder: '选择时间',
@@ -269,8 +269,7 @@ export default {
             }
           },
           events: {
-            blur: this.onBlur,
-            change: this.onChange
+            change: this.handleChange
           }
         }
       ],
@@ -290,9 +289,33 @@ export default {
   },
   methods: {
     // chang size
-    handleSizeChange(val) {},
+    handleSizeChange(val) {
+      console.log('sizeChange: ', val);
+    },
     // change page
-    handleCurrentChange(val) {},
+    handleCurrentChange(val) {
+      console.log('currentPageChange: ', val);
+    },
+    // change
+    handleChange(val) {
+      console.log('change: ', val);
+    },
+    // clear
+    handleClear(val) {
+      console.log('clear: ', val);
+    },
+    // click button
+    handleClick(val) {
+      console.log('click: ', val);
+    },
+    // search
+    handleSearch(queries) {
+      console.log('search: ', queries);
+    },
+    // reset
+    handleReset(queries) {
+      console.log('reset: ', queries);
+    }
   }
 }
 </script>
