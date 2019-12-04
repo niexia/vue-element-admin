@@ -32,19 +32,19 @@ const webpackConfig = merge(baseWebpackConfig, {
     chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
-    new DllReferencePlugin({
-      context: __dirname,
-      // manifest就是我们第一步中打包出来的json文件
-      manifest: require('./dist/vendor.manifest.json'),
-    }),
-    new AddAssetHtmlPlugin({ 
-      filepath: require.resolve('./dist/vendor.dll.js'),
-      // 文件输出目录
-      outputPath: 'vendor',
-      // 脚本或链接标记的公共路径
-      publicPath: config.build.assetsPublicPath + 'vendor',
-      includeSourcemap: false
-    }),
+    // new DllReferencePlugin({
+    //   context: __dirname,
+    //   // manifest就是我们第一步中打包出来的json文件
+    //   manifest: require('./dist/vendor.manifest.json'),
+    // }),
+    // new AddAssetHtmlPlugin({ 
+    //   filepath: require.resolve('./dist/vendor.dll.js'),
+    //   // 文件输出目录
+    //   outputPath: 'vendor',
+    //   // 脚本或链接标记的公共路径
+    //   publicPath: config.build.assetsPublicPath + 'vendor',
+    //   includeSourcemap: false
+    // }),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env
