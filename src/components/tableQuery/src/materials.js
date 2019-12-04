@@ -20,19 +20,35 @@ const mixins = {
     }
   }
 };
-// render 函数中没有与 v-model 的直接对应
+
+/**
+ * 实现 v-model，render 函数中没有与 v-model 的直接对应
+ *
+ * @param {Object} self 组件本身
+ * @returns 返回一个包含 input 事件的对象
+ */
 const _on = self => {
   return {
     input(val) {
+      // element-ui 里的组件值更新之后，也同步修改绑定的
+      // self.field.value，并且 $emit，实现 v-model
       self.field.value = val;
       self.$emit('input', val);
     }
   }
 }
+/**
+ * 格式化设置的 attrs，还有 events
+ *
+ * @param {*} self 组件本身
+ * @param {*} attrs 绑定的 attrs
+ * @param {*} events 绑定的 events
+ * @returns 返回一个对象
+ */
 const getProps = (self, attrs, events) => {
   return {
     props: attrs,
-    on: Object({}, events, _on(self))
+    on: Object.assign({}, events, _on(self))
   }
 }
 
@@ -184,7 +200,6 @@ export default {
       'y-cascader': <y-cascader field={this.field}></y-cascader>,
       'y-button': <y-button field={this.field}></y-button>,
     };
-    console.log(this.field, this.field.type);
     return mapList[this.field.type || 'y-input'];
   }
 }

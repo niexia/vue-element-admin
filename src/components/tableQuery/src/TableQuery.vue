@@ -3,7 +3,7 @@
     <div class="viewBox">
       <header class="view__header">
         <slot name="header">
-          <search-bar v-bind="$attrs"></search-bar>
+          <search-bar v-bind="$attrs" v-on="$listeners"></search-bar>
         </slot>
       </header>
       <main class="view__main">
