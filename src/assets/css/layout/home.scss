@@ -1,0 +1,61 @@
+html,body {
+  width: 100%;
+  height: 100%;
+}
+#app {
+  width: 100%;
+  height: 100%;
+}
+.views__wrapper {
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  > .views__slideBar {
+    height: 100%;
+    > .views__menu {
+      height: 100%;
+      &:not(.el-menu--collapse) {
+        width: 200px;
+      }
+      > .slideBar__expand {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        box-sizing: border-box;
+        cursor: pointer;
+        .iconfont {
+          color: #ffffff;
+          font-size: 20px;
+        }
+      }
+      > .el-submenu {
+        .iconfont {
+          position: relative;
+          top: 3px;
+          margin: 0 2px;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  > .views__content {
+    flex: 1;
+    overflow: auto;
+    background: #f7f8fa;
+    color: #666;
+    > .content__header {
+      height: 60px;
+      background: #fff;
+    }
+    > .content__main {
+      height: calc(100% - 60px);
+    }
+    > .content__main > div {
+      min-height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+  }
+}

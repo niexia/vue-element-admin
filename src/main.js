@@ -7,7 +7,7 @@ import ElementUI from 'element-ui'
 import infiniteScroll from 'vue-infinite-scroll'
 import Echarts from 'vue-echarts'
 import 'element-ui/lib/theme-chalk/index.css'
-import '@/assets/css/main.css'
+import '@/assets/css/main.scss'
 import installPlugins from './plugins/index'
 import components from './components/index';
 

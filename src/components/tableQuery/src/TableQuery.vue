@@ -56,48 +56,52 @@ export default {
   }
 }
 </script>
-<style>
-/* fixed table header */
-.main__view.is-fixed {
-  height: 100%;
-}
-.main__view.is-fixed .viewBox {
-  height: 100%;
-  overflow: hidden;
-}
-.main__view.is-fixed .view__main {
-  overflow: hidden;
-}
-/* common */
-.main__view .viewBox {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  box-sizing: border-box;
-  border-radius: 8px;
-  background: #fff;
-}
-.main__view .view__header {
-  padding-bottom: 10px;
-}
-.main__view .view__header .el-form .el-form-item {
-  margin-bottom: 0;
-}
-.main__view .view__main {
-  flex: 1;
-}
-.main__view .view__footer {
-  height: 40px;
-  padding-top: 8px;
-  box-sizing: border-box;
-}
-.main__view .view__footer .el-pagination {
-  position: relative;
-  text-align: right;
-}
-.main__view .view__footer .el-pagination .el-pagination__total {
-  position: absolute;
-  left: 0;
+<style lang="scss">
+.main__view {
+
+  /* fixed table header */
+  &.is-fixed {
+    height: 100%;
+  }
+  &.is-fixed .viewBox {
+    height: 100%;
+    overflow: hidden;
+  }
+  &.is-fixed .view__main {
+    overflow: hidden;
+  }
+
+  /* common */
+  .viewBox {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background: #fff;
+  }
+  .view__header {
+    padding-bottom: 10px;
+    .el-form .el-form-item {
+      margin-bottom: 0;
+    }
+  }
+  .view__main {
+    flex: 1;
+  }
+  .view__footer {
+    height: 40px;
+    padding-top: 8px;
+    box-sizing: border-box;
+    .el-pagination {
+      position: relative;
+      text-align: right;
+    }
+    .el-pagination .el-pagination__total {
+      position: absolute;
+      left: 0;
+    }
+  }
 }
 </style>
 
