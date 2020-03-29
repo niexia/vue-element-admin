@@ -71,6 +71,11 @@ export default {
           attrs: {
             type: 'danger',
           },
+          slots: {
+            default: function(h) {
+              return <span>上传<i class="el-icon-upload el-icon--right"></i></span>
+            }
+          },
           events: {
             click: this.handleClick
           }
