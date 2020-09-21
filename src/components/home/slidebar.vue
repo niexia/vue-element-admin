@@ -4,8 +4,9 @@
       :class="['views__menu', isCollapse && 'is-collapse']"
       :collapse="isCollapse"
       @select="handleSelect"
-      text-color="#656C75"
-      active-text-color="#428EEF">
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b">
       <div class="slideBar__expand"  @click="isCollapse = !isCollapse">
         <i :class="[isCollapse ? 'icon-menu' : 'icon-menu-arrow']"></i>
       </div>
@@ -40,12 +41,12 @@ export default {
   .el-menu {
     border-right: none;
     .slideBar__expand {
-      color: #656C75;
+      color: #fff;
     }
     .el-submenu__title [class^='icon-']{
       margin:0 8px 0 3px;
       font-size: 18px;
-      color: #656C75;
+      color: #fff;
     }
   }
 }

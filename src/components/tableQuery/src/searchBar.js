@@ -1,5 +1,6 @@
-import Component from './materials.js';
-import ElButton from 'element-ui/lib/button';
+import Field from './materials.js'
+import Button from 'element-ui/lib/button'
+import lodash from 'lodash'
 
 export default {
   name: 'SearchBar',
@@ -8,108 +9,111 @@ export default {
     fieldList: {
       type: Array,
       default() {
-        return [];
-      }
-    }
+        return []
+      },
+    },
+    fieldListData: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {
       isExpand: false,
-      initFieldList: []
-    };
+      initFieldList: [],
+    }
   },
   computed: {
     hasOption() {
-      return this.fieldList.some(item => item.region && item.region === 'option');
-    }
+      return this.fieldList.some(
+        item => item.region && item.region === 'option'
+      )
+    },
   },
   mounted() {
-    this._saveInitFieldList();
+    this._saveInitFieldList()
   },
   methods: {
     handleExpandClick() {
-      this.isExpand = !this.isExpand;
+      this.isExpand = !this.isExpand
     },
     handleSearchClick() {
-      let queries = this._getQueries();
-      this.$emit('search', queries);
+      this.$emit('search')
     },
     handleResetClick() {
-      this.initFieldList.forEach((item, index) => {
-        if (this.fieldList[index].hasOwnProperty('key')) {
-          this.fieldList[index].value = item.value;
-        }
-      });
-      let queries = this._getQueries();
-      this.$emit('reset', queries);
+      Object.keys(this.fieldListData).forEach(key => {
+        this.fieldListData[key] = this.initFieldList[key]
+      })
+      this.$emit('reset')
     },
     _saveInitFieldList() {
-      this.initFieldList = this.fieldList.map(({ value }) => ({ value }))
+      this.initFieldList = lodash.cloneDeep(this.fieldListData)
     },
-    _getQueries() {
-      let queries = {};
-      // 如果设置了 key，并且值有效，则作为查询条件
-      this.fieldList.forEach(({key, value}) => {
-        if (key && value != null && value !== '') {
-          queries[key] = value;
-        }
-      });
-      return queries;
-    }
   },
   render(h) {
-    const { fieldList, isExpand } = this;
+    const { fieldList, fieldListData, isExpand } = this
     const genField = (_fileList, _region) => {
-      return (
-        this._l(_fileList, field => {
-          const _fieldRegion = field.region || 'main';
-          if (_fieldRegion === _region && field.type === 'br') return <br/>;
-          return _fieldRegion === _region && (
-            <div
-              class={[
-                'search__main-item',
-                field.align ? field.align : ''
-              ]}
-            >
-              <Component fieldKey={field.key} field={field} />
+      return this._l(_fileList, field => {
+        const {
+          label = '', region = 'main', type = '', align = '', slots = {}, hidden = false
+        } = field
+        if (region === _region && type === 'br') return <br />
+        return (
+          region === _region && (
+            <div class={['search__main-item', align ? align : '']}>
+              {label && <label class="search__main-item-label">{label}</label>}
+              {
+                (type === 'slot' && slots && slots.default) 
+                  ? slots.default(h)
+                  : <Field field={field} data={fieldListData} />
+              }
             </div>
-          );
-        })
-      );
-    };
+          )
+        )
+      })
+    }
     const TemplateMain = (
       <section ref="main" class="search__main">
         {genField(fieldList, 'main')}
+        {this.hasOption && (
+          <div class="search__main-item">
+            <Button onClick={this.handleExpandClick}>
+              <span>{isExpand ? '收起' : '更多'}</span>
+              <i class = {isExpand ? 'el-icon-arrow-up' : 'el-icon-arrow-down'}></i>
+            </Button>
+          </div>
+        )}
         {
-          this.hasOption && 
-          <ElButton onClick={this.handleExpandClick}>
-            <span>{isExpand ? '收起' : '更多'}</span>
-            <i class={[isExpand ? 'icon-arrowhead-up' : 'icon-arrowhead-down']}></i>
-          </ElButton>
+          <div class="search__main-item">
+            <Button type="primary" onClick={this.handleSearchClick}>
+              <span>搜索</span>
+            </Button>
+          </div>
         }
         {
-          <ElButton type="primary" onClick={this.handleSearchClick}>
-            <span>搜索</span>
-          </ElButton>
-        }
-        {
-          <ElButton type="primary" onClick={this.handleResetClick}>
-            <span>重置</span>
-          </ElButton>
+          <div class="search__main-item">
+            <Button type="primary" onClick={this.handleResetClick}>
+              <span>重置</span>
+            </Button>
+          </div>
         }
       </section>
-    );
+    )
     const TemplateOption = (
-      <section ref="more" style={{ display: isExpand ? 'block' : 'none' }} class="search__option">
+      <section
+        ref="more"
+        style={{ display: isExpand ? 'block' : 'none' }}
+        class="search__option"
+      >
         {genField(fieldList, 'option')}
       </section>
-    );
+    )
 
     return (
-      <div class="header__search">
+      <div class="search-bar">
         {TemplateMain}
         {this.hasOption && TemplateOption}
       </div>
-    );
-  }
+    )
+  },
 }

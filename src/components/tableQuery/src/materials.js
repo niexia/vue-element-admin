@@ -1,205 +1,184 @@
 import ElInput from 'element-ui/lib/input';
-import ElInputNumber from 'element-ui/lib/input-number';
 import ElSelect from 'element-ui/lib/select';
 import ElOption from 'element-ui/lib/option';
-// import ElOptionGroup from 'element-ui/lib/option-group';
-import ElTimeSelect from 'element-ui/lib/time-select';
-import ElTimePicker from 'element-ui/lib/time-picker';
-import ElDatePicker from 'element-ui/lib/date-picker';
-import ElCascader from 'element-ui/lib/cascader';
-import ElCheckbox from 'element-ui/lib/checkbox';
 import ElButton from 'element-ui/lib/button';
 
-const mixins = {
+const fieldMixins = {
   props: {
     field: {
       type: Object,
-      default() {
-        return {};
-      }
-    }
-  }
-};
-
-/**
- * 实现 v-model，render 函数中没有与 v-model 的直接对应
- *
- * @param {Object} self 组件本身
- * @returns 返回一个包含 input 事件的对象
- */
-const _on = self => {
-  return {
-    input(val) {
-      // element-ui 里的组件值更新之后，也同步修改绑定的
-      // self.field.value，并且 $emit，实现 v-model
-      self.field.value = val;
-      self.$emit('input', val);
-    }
-  }
+      default: () => ({}),
+    },
+    data: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
 }
-/**
- * 格式化设置的 attrs，还有 events
- *
- * @param {*} self 组件本身
- * @param {*} attrs 绑定的 attrs
- * @param {*} events 绑定的 events
- * @returns 返回一个对象
- */
-const getProps = (self, attrs, events) => {
+
+const hasKey = (obj = {}, key = '') =>
+  key && Object.hasOwnProperty.call(obj, key)
+
+const getValue = (vm, events) => {
+  const {
+    data = {},
+      field: {
+        key = ''
+      },
+  } = vm
+  return !hasKey(data, key) ?
+    {
+      props: {},
+      on: {}
+    } :
+    {
+      props: {
+        value: data[key]
+      },
+      on: {
+        input(value) {
+          data[key] = value
+        },
+      },
+    }
+}
+
+const getProps = (vm, attrs, events, domAttrs) => {
+  const {
+    props: valueAttrs,
+    on: inputEvents
+  } = getValue(vm, events)
   return {
-    props: attrs,
-    on: Object.assign({}, events, _on(self))
+    ...domAttrs,
+    props: {
+      ...attrs,
+      ...valueAttrs,
+    },
+    on: {
+      ...events,
+      ...inputEvents,
+    },
   }
 }
 
 const components = {
-  'y-select': {
-    mixins: [mixins],
+  'f-select': {
+    mixins: [fieldMixins],
+    computed: {
+      optionsAttrs() {
+        const { optionsAttrs = {} } = this.field
+        const {
+          label = 'label',
+          value = 'value',
+          hint = 'hint',
+          disabled = 'disabled',
+        } = optionsAttrs
+        return {
+          label,
+          value,
+          hint,
+          disabled,
+        }
+      },
+    },
     render(h) {
-      const renderProxy = this._renderProxy;
-      const {attrs = {}, events = {}, slots = {}, options} = this.field;
-      const Props = getProps(this, attrs, events);
+      const { field, optionsAttrs } = this
+      const {
+        attrs = {},
+        events = {},
+        domAttrs = {},
+        options = [],
+        popoverAttrs,
+      } = field
+      const { label, value, disabled, hint } = optionsAttrs
+      const dataObject = getProps(this, attrs, events, domAttrs)
       return (
-        < ElSelect
-          value={this.field.value}
-          {...Props}>
-          {
-            Array.apply(null, {
-              length: options.length
-            }).map(function (item) {
-              return (
-                <ElOption
-                  key={item.value}
-                  label={item.label}
-                  value={item.value}
-                  disabled={item.disabled}>
-                </ElOption>
-              )
-            })
-          }
-          {slots.prefix && <template slot='prefix'>{slots.prefix.call(renderProxy, h)}</template>}
+        <ElSelect {...dataObject}>
+          {options.map((item, index) => (
+            <ElOption
+              key={index}
+              label={item[label]}
+              value={item[value]}
+              disabled={item[disabled]}
+            >
+              {popoverAttrs && (
+                <ElPopover {...{ attrs: popoverAttrs }}>
+                  <div>{item[hint]}</div>
+                  <div slot="reference">{item[label]}</div>
+                </ElPopover>
+              )}
+            </ElOption>
+          ))}
         </ElSelect>
       )
-    }
+    },
   },
 
-  'y-input': {
-    mixins: [mixins],
+  'f-input': {
+    mixins: [fieldMixins],
     render(h) {
-      const renderProxy = this._renderProxy;
-      const {attrs = {}, events = {}, slots = {}} = this.field;
-      const Props = getProps(this, attrs, events);
+      const { field, _renderProxy } = this
+      const { attrs = {}, events = {}, domAttrs = {}, slots = {} } = field
+      const dataObject = getProps(this, attrs, events, domAttrs)
       return (
-        <ElInput value={this.field.value} placeholder={attrs.placeholder} {...Props}>
-          {slots.prepend && <template slot='prepend'>{slots.prepend.call(renderProxy, h)}</template>}
-          {slots.append && <template slot='append'>{slots.append.call(renderProxy, h)}</template>}
-          {slots.prefix && <template slot='prefix'>{slots.prefix.call(renderProxy, h)}</template>}
-          {slots.suffix && <template slot='suffix'>{slots.suffix.call(renderProxy, h)}</template>}
+        <ElInput {...dataObject}>
+          {slots.prepend && (
+            <template slot="prepend">
+              {slots.prepend.call(_renderProxy, h)}
+            </template>
+          )}
+          {slots.append && (
+            <template slot="append">
+              {slots.append.call(_renderProxy, h)}
+            </template>
+          )}
+          {slots.prefix && (
+            <template slot="prefix">
+              {slots.prefix.call(_renderProxy, h)}
+            </template>
+          )}
+          {slots.suffix && (
+            <template slot="suffix">
+              {slots.suffix.call(_renderProxy, h)}
+            </template>
+          )}
         </ElInput>
-      );
-    }
+      )
+    },
   },
 
-  'y-time-select': {
-    mixins: [mixins],
+  'f-button': {
+    mixins: [fieldMixins],
     render(h) {
-      const {attrs = {}, events = {}} = this.field;
-      const Props = getProps(this, attrs, events);
-      return (<ElTimeSelect value={this.field.value} {...Props}></ElTimeSelect>);
-    }
-  },
-
-  'y-time-picker': {
-    mixins: [mixins],
-    render(h) {
-      const {attrs = {}, events = {}} = this.field;
-      const Props = getProps(this, attrs, events);
-      return (<ElTimePicker value={this.field.value} {...Props}></ElTimePicker>);
-    }
-  },
-
-  'y-date-picker': {
-    mixins: [mixins],
-    render(h) {
-      const {attrs = {}, events = {}} = this.field;
-      const Props = getProps(this, attrs, events);
-      return (<ElDatePicker value={this.field.value} {...Props}></ElDatePicker>);
-    }
-  },
-
-  'y-cascader': {
-    mixins: [mixins],
-    render(h) {
-      const self = this;
-      const {attrs = {}, events = {}, options} = this.field;
-      const Props = getProps(this, attrs, events);
-      return (<ElCascader value={this.field.value} options={options} {...Props}></ElCascader>);
-    }
-  },
-
-  'y-button': {
-    mixins: [mixins],
-    render(h) {
-      const renderProxy = this._renderProxy;
-      const {attrs = {}, events = {}, slots = {}, text = ''} = this.field;
-      let Props = {props: attrs, on: Object.assign({}, events)};
+      const { field, _renderProxy } = this
+      const {
+        attrs = {},
+        events = {},
+        domAttrs = {},
+        slots = {},
+        text = '',
+      } = field
+      const dataObject = getProps(this, attrs, events, domAttrs)
       return (
-        <ElButton {...Props}>
-          {
-            slots.default
-              ? slots.default.call(renderProxy, h)
-              : text
-          }
+        <ElButton {...dataObject}>
+          {slots.default ? slots.default.call(_renderProxy, h) : text}
         </ElButton>
-      );
-    }
-  },
-
-  'y-checkbox': {
-    mixins: [mixins],
-    render(h) {
-      const renderProxy = this._renderProxy;
-      const {attrs = {}, events = {}, slots = {}, text = ''} = this.field;
-      const Props = getProps(this, attrs, events);
-      return (<ElCheckbox value={this.field.value} {...Props}>
-        {
-          slots.default
-            ? slots.default.call(renderProxy, h)
-            : text
-        }
-      </ElCheckbox>);
-    }
-  },
-
-  'y-input-number': {
-    mixins: [mixins],
-    render(h) {
-      const self = this;
-      const {attrs = {}, events = {}} = this.field;
-      const Props = getProps(this, attrs, events);
-      return (<ElInputNumber value={this.field.value} {...Props}></ElInputNumber>);
-    }
+      )
+    },
   },
 }
 
 export default {
-  name: 'y-component',
-  components: components,
-  props: {
-    field: Object,
-  },
+  name: 'Field',
+  mixins: [fieldMixins],
+  components,
   render(h) {
-    const mapList = {
-      'y-input': <y-input field={this.field}></y-input>,
-      'y-input-number': <y-input-number field={this.field}></y-input-number>,
-      'y-select': <y-select field={this.field}></y-select>,
-      'y-checkbox': <y-checkbox field={this.field}></y-checkbox>,
-      'y-time-select': <y-time-select field={this.field}></y-time-select>,
-      'y-time-picker': <y-time-picker field={this.field}></y-time-picker>,
-      'y-date-picker': <y-date-picker field={this.field}></y-date-picker>,
-      'y-cascader': <y-cascader field={this.field}></y-cascader>,
-      'y-button': <y-button field={this.field}></y-button>,
+    const { field, data } = this
+    const fieldMap = {
+      'input': <f-input field={field} data={data}></f-input>,
+      'select': <f-select field={field} data={data}></f-select>,
+      'button': <f-button field={field} data={data}></f-button>,
     };
-    return mapList[this.field.type || 'y-input'];
+    return fieldMap[field.type || 'input'];
   }
 }

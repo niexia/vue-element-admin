@@ -2,6 +2,7 @@
   <table-query
     name="tableSearch"
     :field-list="fieldList"
+    :field-list-data="fieldListData"
     :pagination="pagination"
     :isFixed="true"
     @search="handleSearch"
@@ -15,17 +16,39 @@
         stripe
         height="100%"
         style="width: 100%">
-        <el-table-column prop="type" label="类型" align="center" width="180">
+        <el-table-column prop="dsp_id" label="dsp_id" align="center" width="100">
         </el-table-column>
-        <el-table-column prop="address" label="地点" align="center" width="180">
+        <el-table-column prop="advertiser_id" label="advertiser_id" align="center" width="100">
         </el-table-column>
-        <el-table-column prop="money" label="月薪">
+        <el-table-column prop="campaign_id" label="campaign_id" width="100">
+        </el-table-column>
+        <el-table-column prop="name" label="name" align="center" width="100">
+        </el-table-column>
+        <el-table-column prop="pricing_type" label="pricing_type" align="center" width="100">
+        </el-table-column>
+        <el-table-column prop="dsp_type" label="dsp_type" align="center" width="100">
+        </el-table-column>
+        <el-table-column prop="inventory_type" label="inventory_type" align="center" width="120">
+        </el-table-column>
+        <el-table-column prop="create_time" label="create_time" align="center" width="100">
+        </el-table-column>
+        <el-table-column prop="modify_time" label="modify_time" align="center" width="100">
+        </el-table-column>
+        <el-table-column prop="api_url" label="api_url" align="center" width="100">
+        </el-table-column>
+        <el-table-column prop="status" label="status" align="center" width="100">
+        </el-table-column>
+        <el-table-column prop="data" label="data" align="center" width="100">
+        </el-table-column>
+        <el-table-column prop="status_time" label="status_time" align="center">
         </el-table-column>
       </el-table>
     </template>
   </table-query>
 </template>
 <script>
+import getFieldList from '@/const/tableApplication/fieldList'
+
 export default {
   name: 'TableSearch',
   mixins: [],
@@ -33,251 +56,32 @@ export default {
   props: {},
   data() {
     return {
-      queryParams: {
-        name: 'Vue',
+      fieldListData: {
+        dsp_id: '',
+        advertiser_id: '',
+        inventory_type: '',
+        campaign_id: '',
+        name: '',
+        pricing_type: '',
+        dsp_type: '',
+        api_url: '',
+        status: '',
       },
-      tableData: [
-        {type: '类型一', address: '广州', money: 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动'}, 
-        {type: '类型二', address: '王小虎', money: 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动'}, 
-        {type: '类型三', address: '北京', money: 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动'}, 
-        {type: '类型四', address: '深圳', money: 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动'}, 
-        {type: '类型四', address: '上海', money: 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动'}, 
-        {type: '类型二', address: '深圳', money: 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动'}, 
-        {type: '类型三', address: '北京', money: 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动'}, 
-        {type: '类型四', address: '深圳', money: 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动'}, 
-        {type: '类型四', address: '上海', money: 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动'}, 
-        {type: '类型四', address: '广州', money: 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动'}
-      ],
-      // searchBar
-      fieldList: [
-        // button
-        {
-          type:'y-button',
-          align: 'right',
-          text: '导出',
-          region:'main',
-          attrs: {
-            icon: 'el-icon-upload'
-          },
-          events: {
-            click: this.handleClick
-          }
-        },
-        {
-          type:'y-button',
-          align: 'right',
-          text: '删除',
-          region:'main',
-          attrs: {
-            type: 'danger',
-          },
-          slots: {
-            default: function(h) {
-              return <span>上传<i class="el-icon-upload el-icon--right"></i></span>
-            }
-          },
-          events: {
-            click: this.handleClick
-          }
-        },
-        {
-          type:'y-button',
-          align: 'right',
-          text: '新增',
-          region:'main',
-          attrs: {
-            type: 'primary',
-          },
-          events: {
-            click: this.handleClick
-          }
-        },
-        // main-form
-        {
-          type: 'y-input',
-          region: 'main',
-          key: 'query1',
-          value: '',
-          attrs: {
-            placeholder: '请输入',
-          },
-          events: {
-            change: this.handleChange,
-            clear: this.handleClear
-          }
-        },
-        {
-          type:'y-time-picker',
-          region:'main',
-          key: 'query2',
-          value: '',
-          attrs:{
-            clearable: true,
-            placeholder: '任意时间点',
-            'prefix-icon': 'af-icon-search',
-            'arrow-control': true,
-            'picker-options': {
-              selectableRange: '18:30:00 - 20:30:00'
-            }
-          },
-          events: {
-            change: this.handleChange
-          }
-        },
-        // option-form
-        {
-          type:'y-time-select',
-          region: 'option',
-          key: 'query3',
-          value: '',
-          attrs:{
-            clearable: true,
-            placeholder: '选择时间',
-            'prefix-icon': 'af-icon-search',
-            'picker-options': {
-              start: '08:30',
-              step: '00:15',
-              end: '18:30'
-            }
-          },
-          events: {
-            change: this.handleChange
-          }
-        },
-        {
-          type:'y-time-select',
-          region: 'option',
-          key: 'query4',
-          value: '',
-          attrs:{
-            clearable: true,
-            placeholder: '选择时间',
-            'prefix-icon': 'af-icon-search',
-            'picker-options': {
-              start: '08:30',
-              step: '00:15',
-              end: '18:30'
-            }
-          },
-          events: {
-            change: this.handleChange
-          }
-        },
-        {
-          type:'y-time-select',
-          region: 'option',
-          key: 'query5',
-          value: '',
-          attrs:{
-            clearable: true,
-            placeholder: '选择时间',
-            'prefix-icon': 'af-icon-search',
-            'picker-options': {
-              start: '08:30',
-              step: '00:15',
-              end: '18:30'
-            }
-          },
-          events: {
-            change: this.handleChange
-          }
-        },
-        {
-          type:'y-time-select',
-          region: 'option',
-          key: 'query6',
-          value: '',
-          attrs:{
-            clearable: true,
-            placeholder: '选择时间',
-            'prefix-icon': 'af-icon-search',
-            'picker-options': {
-              start: '08:30',
-              step: '00:15',
-              end: '18:30'
-            }
-          },
-          events: {
-            change: this.handleChange
-          }
-        },
-        {
-          type:'y-time-select',
-          region: 'option',
-          key: 'query7',
-          value: '',
-          attrs:{
-            clearable: true,
-            placeholder: '选择时间',
-            'prefix-icon': 'af-icon-search',
-            'picker-options': {
-              start: '08:30',
-              step: '00:15',
-              end: '18:30'
-            }
-          },
-          events: {
-            change: this.handleChange
-          }
-        },
-        {
-          type:'y-time-select',
-          region: 'option',
-          key: 'query8',
-          value: '',
-          attrs:{
-            clearable: true,
-            placeholder: '选择时间',
-            'prefix-icon': 'af-icon-search',
-            'picker-options': {
-              start: '08:30',
-              step: '00:15',
-              end: '18:30'
-            }
-          },
-          events: {
-            change: this.handleChange
-          }
-        },
-        {
-          type:'y-time-select',
-          region: 'option',
-          key: 'query9',
-          value: '',
-          attrs:{
-            clearable: true,
-            placeholder: '选择时间',
-            'prefix-icon': 'af-icon-search',
-            'picker-options': {
-              start: '08:30',
-              step: '00:15',
-              end: '18:30'
-            }
-          },
-          events: {
-            change: this.handleChange
-          }
-        },
-        {
-          type:'y-time-select',
-          region: 'option',
-          key: 'query10',
-          value: '',
-          attrs:{
-            clearable: true,
-            placeholder: '选择时间',
-            'prefix-icon': 'af-icon-search',
-            'picker-options': {
-              start: '08:30',
-              step: '00:15',
-              end: '18:30'
-            }
-          },
-          events: {
-            change: this.handleChange
-          }
-        }
-      ],
+      tableData: new Array(20).fill({
+        dsp_id: '1',
+        advertiser_id: '12345',
+        campaign_id: '1234',
+        name: '我是无情的单测3',
+        pricing_type: '3',
+        dsp_type: '3',
+        inventory_type: '80088',
+        create_time: '2020-05-13 12:31:39',
+        modify_time: '2020-09-19 08:42:38',
+        api_url: 'http://www.baidu.com',
+        status: '0',
+        data: 'xxxxxx',
+        status_time: '2020-05-11 10:43:21',
+      }),
       // pagination
       pagination: {
         attrs: {
@@ -292,6 +96,13 @@ export default {
       }
     }
   },
+  computed: {
+    fieldList() {
+      return getFieldList.call(this, {
+        handleAddClick: this.handleAddClick
+      })
+    }
+  },
   methods: {
     // chang size
     handleSizeChange(val) {
@@ -301,16 +112,8 @@ export default {
     handleCurrentChange(val) {
       console.log('currentPageChange: ', val);
     },
-    // change
-    handleChange(val) {
-      console.log('change: ', val);
-    },
-    // clear
-    handleClear(val) {
-      console.log('clear: ', val);
-    },
     // click button
-    handleClick(val) {
+    handleAddClick(val) {
       console.log('click: ', val);
     },
     // search
