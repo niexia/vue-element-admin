@@ -14,6 +14,6 @@ git commit -m 'merge dev'
 git push
 
 # 部署到 github
-git push -f https://github.com/yangseas/admin-system.git master:gh-pages
+git push -f https://github.com/niexias/vue-element-admin.git master:gh-pages
 
 cd -

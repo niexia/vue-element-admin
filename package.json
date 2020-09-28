@@ -1,8 +1,8 @@
 {
-  "name": "admin-system",
+  "name": "vue-element-admin",
   "version": "1.0.0",
-  "description": "基于 vue 和 elementUI 组件库的中后端系统",
-  "author": "yangseas",
+  "description": "An admin system solution, using ES6, Vue and Element UI etc",
+  "author": "niexias",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
