@@ -76,7 +76,7 @@ export default {
       handler() {
         this.reset()
       },
-      immediate: true
+      immediate: true,
     }
   },
   methods: {

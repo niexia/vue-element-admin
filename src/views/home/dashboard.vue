@@ -44,7 +44,7 @@
               <el-button size="small">会议</el-button>
             </el-badge>
           </div>
-          <el-button class="todo__button" type="primary" size="small">发送通知</el-button>
+          <el-button class="todo__button" type="primary" size="small" plain>发送通知</el-button>
         </div>
       </div>
     </section>
@@ -468,7 +468,7 @@ export default {
   .personal__todo {
     .todo__info {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       flex-wrap: wrap;
       padding: 20px 0px 20px;
       border-bottom: 1px solid #F2F6FC;

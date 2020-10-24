@@ -4,9 +4,9 @@
       :class="['views__menu', isCollapse && 'is-collapse']"
       :collapse="isCollapse"
       @select="handleSelect"
-      background-color="#545c64"
+      background-color="#304156"
       text-color="#fff"
-      active-text-color="#ffd04b">
+      active-text-color="#ffeb3b">
       <div class="slideBar__expand"  @click="isCollapse = !isCollapse">
         <i :class="[isCollapse ? 'icon-menu' : 'icon-menu-arrow']"></i>
       </div>

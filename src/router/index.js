@@ -17,9 +17,9 @@ const TableSearch = resolve => require(['@/views/tableApplication/tableSearch.vu
 
 // formApplication
 const FromBasic = resolve => require(['@/views/formApplication/formBasic.vue'], resolve);
-const formDetail = resolve => require(['@/views/formApplication/formDetail.vue'], resolve);
 
 // extendComponent
+const Calendar = resolve => require(['@/views/extendComponent/calendar.vue'], resolve);
 const Anchor = resolve => require(['@/views/extendComponent/anchor.vue'], resolve);
 const LazyLoad = resolve => require(['@/views/extendComponent/lazyLoad.vue'], resolve);
 const DocViewer = resolve => require(['@/views/extendComponent/docViewer.vue'], resolve);
@@ -27,11 +27,6 @@ const ImageViewer = resolve => require(['@/views/extendComponent/imageViewer.vue
 const Maps = resolve => require(['@/views/extendComponent/map.vue'], resolve);
 const MarkdownEditor = resolve => require(['@/views/extendComponent/markdownEditor.vue'], resolve);
 const FlowChart = resolve => require(['@/views/extendComponent/flowChart.vue'], resolve);
-
-// components
-const DatePicker = resolve => require(['@/views/components/datePicker.vue'], resolve);
-const Calendar = resolve => require(['@/views/components/calendar.vue'], resolve);
-const Transfer = resolve => require(['@/views/components/transfer.vue'], resolve);
 
 // systemSetting
 const PersonalCenter = resolve => require(['@/views/systemSetting/personalCenter.vue'], resolve);
@@ -66,7 +61,7 @@ const router =  new Router({
 // dynamic router
 export const routesMenu = [{
   path: '/home',
-  name: 'HOME',
+  name: '首页',
   component: Home,
   children: [{
     path: 'dashboard',
@@ -75,7 +70,7 @@ export const routesMenu = [{
   }]
 }, {
   path: '/table',
-  name: '表格应用',
+  name: '表格',
   component: Home,
   children: [{
     path: 'tableBasic',
@@ -88,22 +83,22 @@ export const routesMenu = [{
   }]
 }, {
   path: '/form',
-  name: '表单应用',
+  name: '表单',
   component: Home,
   children: [{
     path: 'formBasic',
     name: '基础表单',
     component: FromBasic,
-  }, {
-    path: 'tableDetail',
-    name: '表单详情',
-    component: formDetail,
   }]
 }, {
   path: '/extend',
-  name: '扩展应用',
+  name: '扩展',
   component: Home,
   children: [{
+    path: 'calendar',
+    name: 'calendar',
+    component: Calendar,
+  },{
     path: 'anchor',
     name: '锚点',
     component: Anchor,
@@ -131,23 +126,6 @@ export const routesMenu = [{
     path: 'flowChart',
     name: '流程图',
     component: FlowChart,
-  }]
-}, {
-  path: '/components',
-  name: '组件',
-  component: Home,
-  children: [{
-    path: 'date-picker',
-    name: 'date-picker',
-    component: DatePicker,
-  }, {
-    path: 'calendar',
-    name: 'calendar',
-    component: Calendar,
-  }, {
-    path: 'transfer',
-    name: 'transfer',
-    component: Transfer,
   }]
 }, {
   path: '/setting',
