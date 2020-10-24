@@ -1,8 +1,6 @@
-#### 个人平台
+This is an admin interfaces that based on vue.js and element-ui.
 
-基于 vue 和 elementUI 组件库的中后端系统
-
-#### 开始使用
+## Available Scripts
 
 ``` bash
 # install dependencies
@@ -20,4 +18,3 @@ npm run deploy
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-
